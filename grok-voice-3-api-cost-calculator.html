@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok Voice 3 API Cost Calculator — Realtime Audio &amp; Text Pricing (2026)</title>
+<meta name="description" content="Free Grok Voice 3.0 API cost calculator. Estimate xAI realtime audio ($0.08/min), PSTN calls, and text-input costs per minute, hour, or month. Compare with Grok Voice 2.0 and plan your voice-agent budget.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/grok-voice-3-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Grok Voice 3 API Cost Calculator">
+<meta property="og:description" content="Estimate xAI Grok Voice 3.0 realtime audio ($0.08/min), PSTN, and text-input API costs. Free tool, official pricing, live math.">
+<meta name="robots" content="index,follow">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.45rem;font-weight:700;margin-top:4px}
+.card .v small{font-size:.85rem;color:var(--mut);font-weight:400}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Grok Voice <span>3</span> API Cost Calculator</h1>
+<p class="sub">Estimate xAI <strong>grok-voice-3.0</strong> realtime API costs — audio minutes, text input, and PSTN calling. Official pricing, live math, no signup.</p>
+</header>
+
+<div class="grid">
+<div>
+<label for="minutes">Audio minutes / day</label>
+<input id="minutes" type="number" min="0" step="1" value="60">
+</div>
+<div>
+<label for="textin">Text input tokens / day</label>
+<input id="textin" type="number" min="0" step="1000" value="50000">
+</div>
+<div>
+<label for="pstn">PSTN call minutes / day</label>
+<input id="pstn" type="number" min="0" step="1" value="0">
+</div>
+<div>
+<label for="days">Days / month</label>
+<select id="days">
+<option value="30" selected>30 days</option>
+<option value="22">22 weekdays</option>
+<option value="7">7 days</option>
+<option value="1">1 day</option>
+</select>
+</div>
+</div>
+
+<div class="results">
+<div class="card"><div class="k">Audio rate / hour</div><div class="v" id="rHour">$—</div></div>
+<div class="card"><div class="k">Audio cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Total / month</div><div class="v" id="rMonth">$—</div></div>
+<div class="card"><div class="k">Text input / month</div><div class="v" id="rText">$—</div></div>
+</div>
+
+<div class="note" id="tipBox">💡 1 hour of realtime audio ≈ <strong>$4.80</strong>. 10 h/day ≈ $1,440/month in audio alone.</div>
+
+<script>
+(function(){
+"use strict";
+// xAI official pricing for grok-voice-3.0 (USD), docs.x.ai — pricing fields are micro-USD
+var AUDIO_PER_MIN = 0.08;            // realtimeAudioSecondPrice 13333333 µ$ → $0.0133/s
+var TEXT_IN_PER_M = 4.00;            // realtimeTextInputPrice 40000000 µ$ per 1M tokens
+var PSTN_PER_MIN  = 0.10;            // pstnMinutePrice 100000000 µ$
+function $(id){return document.getElementById(id)}
+function fmt(n){ if(!isFinite(n))return "$—"; if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0}); if(n>=100)return "$"+n.toFixed(0); if(n>=1)return "$"+n.toFixed(2); return "$"+n.toFixed(3)}
+function calc(){
+  var min=parseFloat($("minutes").value)||0;
+  var tok=parseFloat($("textin").value)||0;
+  var pstn=parseFloat($("pstn").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var audioMin=min+pstn; // realtime audio minutes (PSTN billed separately below)
+  $("rHour").textContent=fmt(60*AUDIO_PER_MIN); // $/hour of realtime audio at current daily volume
+  $("rDay").textContent=fmt(min*AUDIO_PER_MIN + pstn*PSTN_PER_MIN + tok/1e6*TEXT_IN_PER_M);
+  $("rMonth").textContent=fmt(d*(min*AUDIO_PER_MIN + pstn*PSTN_PER_MIN + tok/1e6*TEXT_IN_PER_M));
+  $("rText").textContent=fmt(d*tok/1e6*TEXT_IN_PER_M);
+  var hrs=min/60;
+  $("tipBox").innerHTML="💡 1 hour of realtime audio ≈ <strong>$4.80</strong>. Your "+Math.round(min)+" min/day ≈ "+fmt(hrs*4.80)+"/day in audio tokens.";
+}
+["minutes","textin","pstn","days"].forEach(function(id){$(id).addEventListener("input",calc)});
+calc();
+})();
+</script>
+
+<h2>grok-voice-3.0 official pricing (per minute &amp; per token)</h2>
+<table>
+<tr><th>Component</th><th class="num">Price</th><th>Notes</th></tr>
+<tr><td>Realtime audio (in+out)</td><td class="num">$0.08 / min</td><td>$0.0133/s, billed per second</td></tr>
+<tr><td>Realtime audio tokens</td><td class="num">$0.267 / 1M tokens</td><td>audio-token based accounting</td></tr>
+<tr><td>Text input (chat/context)</td><td class="num">$4.00 / 1M tokens</td><td>prompts &amp; tool results</td></tr>
+<tr><td>PSTN phone minutes</td><td class="num">$0.10 / min</td><td>carrier termination fee</td></tr>
+<tr><td>Text output</td><td class="num">included</td><td>voice channel returns audio</td></tr>
+</table>
+
+<h2>Grok Voice 3.0 vs Voice 2.0</h2>
+<p>Identical list pricing (<code>$0.08/min</code> audio, <code>$4/M</code> text in, <code>$0.10/min</code> PSTN). Voice 3.0 improves voice naturalness, interruption handling, and multilingual latency — you upgrade quality at zero price delta, so model choice does not change your budget math.</p>
+
+<h2>Typical voice-agent workloads</h2>
+<table>
+<tr><th>Workload</th><th class="num">Audio / month</th><th class="num">Est. total</th></tr>
+<tr><td>10 min/day demo bot</td><td class="num">300 min</td><td class="num">≈ $24 + text</td></tr>
+<tr><td>1 h/day support line</td><td class="num">1,800 min</td><td class="num">≈ $144 + text</td></tr>
+<tr><td>8 h/day agent (business hrs)</td><td class="num">~4,600 min</td><td class="num">≈ $370 + text</td></tr>
+<tr><td>24/7 continuous session</td><td class="num">43,200 min</td><td class="num">≈ $3,456 + text</td></tr>
+</table>
+
+<h3>How to cut your bill</h3>
+<ul>
+<li><strong>Keep prompts short</strong> — every chat turn re-sends context at $4/M tokens; a 20k-token system prompt on 100 calls/day costs $8/day alone.</li>
+<li><strong>Bound conversation length</strong> — audio is billed per second; cap sessions to avoid runaway sessions.</li>
+<li><strong>Avoid PSTN when possible</strong> — WebRTC sessions skip the $0.10/min carrier fee, you only pay the $0.08/min audio price.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Is there a free tier for grok-voice-3.0?</h3>
+<p>No. xAI realtime voice models are pay-as-you-go only (team credit required). Text-side free tiers do not apply to the realtime audio endpoint.</p>
+<h3>How is audio billed — tokens or seconds?</h3>
+<p>Both views exist in xAI billing: <code>realtimeAudioSecondPrice</code> ($0.0133/s) and <code>realtimeAudioTokenPrice</code> ($0.267/M audio tokens). They are the same cost expressed in different units; this calculator uses the per-second/minute view.</p>
+<h3>Does Grok Voice 3.0 cost more than 2.0?</h3>
+<p>No — same published rates. See the comparison section above.</p>
+<h3>What about text output tokens?</h3>
+<p>The realtime endpoint returns audio; text output is not separately metered on the voice channel. Text-in (your prompts, tool results) is metered at $4/M.</p>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>xAI models &amp; pricing docs (docs.x.ai) — retrieved 2026-10-16</li>
+<li>Gemini/competitor voice pricing comparisons on our <a href="index.html">calculator hub</a></li>
+</ul>
+
+<footer>
+<p>© 2026 AI API Calc — independent tool, not affiliated with xAI. Pricing changes are reflected ASAP; always confirm at docs.x.ai before budgeting.</p>
+<p><a href="index.html">All AI API calculators</a> · <a href="gemini-4-argon-api-cost-calculator.html">Gemini 4 Argon calculator</a></p>
+</footer>
+</div>
+</body>
+</html>

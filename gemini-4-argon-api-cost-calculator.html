@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini 4 Argon API Cost Calculator — Input, Output &amp; 1M-Context Pricing (2026)</title>
+<meta name="description" content="Free Gemini 4 Argon API cost calculator. Estimate google gemini-4-argon costs: $2/M input, $10/M output, implicit cache $0.10/M, 1M-token long-context jobs, batch 50% off. Includes the Dec 1 2026 price change.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/gemini-4-argon-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gemini 4 Argon API Cost Calculator">
+<meta property="og:description" content="Estimate gemini-4-argon API costs: $2/M in, $10/M out, implicit caching, 1M-context, batch mode. Official pricing, live math.">
+<meta name="robots" content="index,follow">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Gemini <span>4 Argon</span> API Cost Calculator</h1>
+<p class="sub">Estimate <strong>gemini-4-argon</strong> costs — standard vs batch, 1M-token long-context, implicit caching, and the <strong>Dec 1, 2026 price doubling</strong>.</p>
+</header>
+
+<div class="grid">
+<div>
+<label for="reqs">Requests / day</label>
+<input id="reqs" type="number" min="0" step="10" value="100">
+</div>
+<div>
+<label for="tin">Input tokens / request</label>
+<input id="tin" type="number" min="0" step="1000" value="8000">
+</div>
+<div>
+<label for="tout">Output tokens / request</label>
+<input id="tout" type="number" min="0" step="100" value="1500">
+</div>
+<div>
+<label for="days">Days / month</label>
+<select id="days">
+<option value="30" selected>30 days</option>
+<option value="22">22 weekdays</option>
+<option value="7">7 days</option>
+<option value="1">1 day</option>
+</select>
+</div>
+<div>
+<label for="mode">Pricing mode</label>
+<select id="mode">
+<option value="std" selected>Standard (through Nov 30)</option>
+<option value="std2">Standard (from Dec 1)</option>
+<option value="batch">Batch −50% (through Nov 30)</option>
+<option value="batch2">Batch −50% (from Dec 1)</option>
+</select>
+</div>
+<div>
+<label for="cache">Cache hit rate on input</label>
+<select id="cache">
+<option value="0" selected>0% (no implicit cache)</option>
+<option value="0.5">50%</option>
+<option value="0.8">80%</option>
+</select>
+</div>
+</div>
+
+<div class="results">
+<div class="card"><div class="k">Cost / request</div><div class="v" id="rReq">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Total / month</div><div class="v" id="rMonth">$—</div></div>
+<div class="card"><div class="k">Cache savings / mo</div><div class="v" id="rSave">$—</div></div>
+</div>
+
+<div class="warn" id="warnBox">⚠️ Dec 1, 2026: input $2→$4, output $10→$20, cache $0.10→$0.20 per 1M tokens. Lock your budget math accordingly.</div>
+
+<script>
+(function(){
+"use strict";
+// Google AI official pricing (USD / 1M tokens), ai.google.dev — retrieved 2026-10-16
+var P = {
+  std:  {in:2.00, out:10.00, cache:0.10},
+  std2: {in:4.00, out:20.00, cache:0.20},
+  batch:{in:1.00, out:5.00,  cache:0.10},
+  batch2:{in:2.00,out:10.00, cache:0.20}
+};
+function $(id){return document.getElementById(id)}
+function fmt(n){ if(!isFinite(n))return "$—"; if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0}); if(n>=100)return "$"+n.toFixed(0); if(n>=1)return "$"+n.toFixed(2); return "$"+n.toFixed(3)}
+function calc(){
+  var reqs=parseFloat($("reqs").value)||0;
+  var tin=parseFloat($("tin").value)||0;
+  var tout=parseFloat($("tout").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var p=P[$("mode").value];
+  var cr=parseFloat($("cache").value)||0;
+  var cacheRate=( $("mode").value.indexOf("batch")===0 ) ? 0 : cr; // batch not cached here
+  var inCost=tin/1e6*(p.in*(1-cacheRate)+p.cache*cacheRate);
+  var outCost=tout/1e6*p.out;
+  var per=inCost+outCost;
+  $("rReq").textContent=fmt(per);
+  $("rDay").textContent=fmt(per*reqs);
+  $("rMonth").textContent=fmt(per*reqs*d);
+  $("rSave").textContent=fmt(tin/1e6*cacheRate*reqs*d*(p.in-p.cache));
+}
+["reqs","tin","tout","days","mode","cache"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+
+<h2>gemini-4-argon official pricing (per 1M tokens, USD)</h2>
+<table>
+<tr><th>Component</th><th class="num">Through Nov 30, 2026</th><th class="num">From Dec 1, 2026</th></tr>
+<tr><td>Input</td><td class="num">$2.00</td><td class="num">$4.00</td></tr>
+<tr><td>Output (incl. thinking tokens)</td><td class="num">$10.00</td><td class="num">$20.00</td></tr>
+<tr><td>Context caching (implicit only)</td><td class="num">$0.10</td><td class="num">$0.20</td></tr>
+<tr><td>Batch input</td><td class="num">$1.00</td><td class="num">$2.00</td></tr>
+<tr><td>Batch output</td><td class="num">$5.00</td><td class="num">$10.00</td></tr>
+</table>
+<p class="sub" style="margin-top:6px">Grounding w/ Google Search: 5,000 free/month shared across Gemini 3+ models, then $14/1k requests. Not available on Free tier or AI Pro plan.</p>
+
+<h2>The 1M-token context reality check</h2>
+<p>Gemini 4 Argon accepts up to <strong>1M tokens</strong>. A single full-context request (1M in, 4k out) costs <strong>$2.04</strong> at launch pricing — and <strong>$4.08</strong> after Dec 1. That is cheap per request, but agentic loops re-send context hundreds of times a day, which is exactly why implicit caching matters.</p>
+<table>
+<tr><th>Job shape</th><th class="num">Launch price</th><th class="num">After Dec 1</th></tr>
+<tr><td>8k in / 1.5k out (typical agent step)</td><td class="num">$0.031</td><td class="num">$0.062</td></tr>
+<tr><td>100k in / 8k out (repo analysis)</td><td class="num">$0.28</td><td class="num">$0.56</td></tr>
+<tr><td>1M in / 4k out (full-context)</td><td class="num">$2.04</td><td class="num">$4.08</td></tr>
+<tr><td>1M in × 80% cached / 4k out</td><td class="num">$0.52</td><td class="num">$1.04</td></tr>
+</table>
+
+<h3>Three levers that actually cut cost</h3>
+<ul>
+<li><strong>Implicit caching</strong> — repeated prefixes (system prompt, RAG docs, repo context) drop from $2/M to $0.10/M. At an 80% hit rate, that same 1M-token request falls from $2.04 to ~$0.52 — a 4× cut that compounds across every agent step.</li>
+<li><strong>Batch API</strong> — 50% off for non-latency-critical workloads (evals, enrichment, backfills).</li>
+<li><strong>Trim thinking tokens</strong> — output is billed <em>including</em> reasoning tokens; cap <code>max_output</code> / thinking budget on agentic loops where 1.5k visible tokens may hide 10k thinking tokens.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Is Gemini 4 Argon available on the free tier?</h3>
+<p>No. It is paid-only, and also excluded from the Google AI Pro plan. You need a billed API project.</p>
+<h3>Does Argon support explicit caching?</h3>
+<p>No — implicit caching only, billed at $0.10/M (launch) for cached portions of the input.</p>
+<h3>Is there a long-context surcharge (&gt;200k tokens)?</h3>
+<p>Unlike some Gemini models with dual-tier rates, Argon's published table shows a single standard rate for input/output regardless of context length, up to 1M tokens.</p>
+<h3>Thinking tokens really are billed?</h3>
+<p>Yes — the output price explicitly includes thinking tokens. Budget agents on total generated tokens, not just visible text.</p>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Google AI for Developers — Gemini API pricing (ai.google.dev), retrieved 2026-10-16</li>
+<li>More tools on our <a href="index.html">calculator hub</a> · <a href="grok-voice-3-api-cost-calculator.html">Grok Voice 3 calculator</a></li>
+</ul>
+
+<footer>
+<p>© 2026 AI API Calc — independent tool, not affiliated with Google. Verify current pricing at ai.google.dev before budgeting.</p>
+</footer>
+</div>
+</body>
+</html>
