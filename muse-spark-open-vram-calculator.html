@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muse Spark Open VRAM Calculator — 816B (A42B) Memory Requirements by Quantization (2026)</title>
+<meta name="description" content="Muse Spark Open VRAM calculator. 816B-A42B MoE memory requirements: BF16 1632GB, FP8 816GB, NVFP4 408GB weights. Check GPU fit for Mac Studio 512GB, H100, H200, B200, MI300X.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/muse-spark-open-vram-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muse Spark Open VRAM Calculator">
+<meta property="og:description" content="816B-A42B MoE VRAM needs by quantization: BF16/FP8/NVFP4/Q4. GPU fit checker for Mac Studio, H100/H200, B200, MI300X.">
+<meta name="robots" content="index,follow">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.card .ok{color:var(--ok)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Muse <span>Spark Open</span> VRAM Calculator</h1>
+<p class="sub">Memory requirements for Meta's <strong>Muse-Spark-Open-816B-A42B</strong> (816B-total / 42B-active MoE, image-text-to-text) across quantizations — with a GPU fit checker.</p>
+</header>
+
+<div class="grid">
+<div>
+<label for="bp">Quantization (bytes/param)</label>
+<select id="bp">
+<option value="2">BF16 — 2.00 B/param (official)</option>
+<option value="1">FP8 / INT8 — 1.00 B/param</option>
+<option value="0.5">NVFP4 — 0.50 B/param (official variant)</option>
+<option value="0.58">GGUF Q4_K_M — ~0.58 B/param (est.)</option>
+<option value="custom">Custom…</option>
+</select>
+</div>
+<div id="customWrap" style="display:none">
+<label for="bpCustom">Custom bytes/param</label>
+<input id="bpCustom" type="number" min="0.25" max="8" step="0.01" value="0.5">
+</div>
+<div>
+<label for="ovh">Runtime overhead (%)</label>
+<input id="ovh" type="number" min="0" max="50" step="1" value="8">
+</div>
+<div>
+<label for="kv">KV-cache allowance (GB)</label>
+<input id="kv" type="number" min="0" max="512" step="4" value="24">
+</div>
+<div>
+<label for="gpu">GPU pool VRAM (GB total)</label>
+<select id="gpu">
+<option value="512">Mac Studio 512GB unified ×1</option>
+<option value="1024">Mac Studio 512GB ×2</option>
+<option value="640">H100 80GB ×8</option>
+<option value="1128">H200 141GB ×8</option>
+<option value="2256">H200 141GB ×16</option>
+<option value="1536">B200 192GB ×8</option>
+<option value="1536">MI300X 192GB ×8</option>
+<option value="32">RTX 5090 32GB ×1</option>
+<option value="custom">Custom…</option>
+</select>
+</div>
+<div id="gpuCustomWrap" style="display:none">
+<label for="gpuCustom">Custom total VRAM (GB)</label>
+<input id="gpuCustom" type="number" min="8" max="8192" step="8" value="512">
+</div>
+</div>
+
+<div class="results">
+<div class="card"><div class="k">Weights</div><div class="v" id="rW">—</div></div>
+<div class="card fee"><div class="k">Total required</div><div class="v" id="rT">—</div></div>
+<div class="card"><div class="k">Fit</div><div class="v" id="rF">—</div></div>
+<div class="card"><div class="k">Headroom</div><div class="v" id="rH">—</div></div>
+</div>
+
+<h2>Verified baseline numbers</h2>
+<table>
+<tr><th>Quantization</th><th class="num">Bytes/param</th><th class="num">Weights (GB)</th><th class="num">Typical total*</th></tr>
+<tr><td>BF16 (official release)</td><td class="num">2.00</td><td class="num">1,632</td><td class="num">1,786.6</td></tr>
+<tr><td>FP8 / INT8</td><td class="num">1.00</td><td class="num">816</td><td class="num">905.3</td></tr>
+<tr><td>NVFP4 (official variant)</td><td class="num">0.50</td><td class="num">408</td><td class="num">464.6</td></tr>
+<tr><td>GGUF Q4_K_M (community est.)</td><td class="num">~0.58</td><td class="num">473.3</td><td class="num">535.1</td></tr>
+</table>
+<p>* +8% runtime overhead + 24GB KV allowance. The BF16 shard set on Hugging Face is 65 safetensors files ≈ 25.1GB each ≈ 1.63TB, matching the 816B × 2B math.</p>
+
+<h2>Hardware fit matrix</h2>
+<table>
+<tr><th>Hardware pool</th><th class="num">VRAM (GB)</th><th class="num">BF16</th><th class="num">FP8</th><th class="num">NVFP4</th></tr>
+<tr><td>Mac Studio 512GB unified</td><td class='num'>512</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>✅ fits</td></tr>
+<tr><td>2x Mac Studio 512GB</td><td class='num'>1024</td><td class='num'>❌</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>8x H100 80GB</td><td class='num'>640</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>✅ fits</td></tr>
+<tr><td>8x H200 141GB</td><td class='num'>1128</td><td class='num'>❌</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>16x H200 141GB</td><td class='num'>2256</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>8x B200 192GB</td><td class='num'>1536</td><td class='num'>❌</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>8x MI300X 192GB</td><td class='num'>1536</td><td class='num'>❌</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>RTX 5090 32GB</td><td class='num'>32</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>❌</td></tr>
+</table>
+<p class="sub">Fit = weights × 1.08 + 24GB KV ≤ pooled VRAM. Multi-GPU assumes tensor-parallel pooling; real-world interconnect overhead adds a few percent.</p>
+
+<div class="warn">KV-cache sizing is an <strong>estimate</strong>: Meta's config.json is access-gated, so per-token KV size is not yet public. Treat the 24GB default as a placeholder and raise it for long-context serving. Weights math is exact.</div>
+
+<h2>Reading the results like a pro</h2>
+<ul>
+<li><strong>The 512GB Mac Studio story</strong>: NVFP4 total (~465GB) fits in 512GB unified memory with ~47GB headroom — the cheapest single-box way to run this model. Q4_K_M (~535GB) does not fit one box; you need 2×.</li>
+<li><strong>BF16 is datacenter-only</strong>: 1,787GB total means 16× H200 or equivalent. FP8 (905GB) fits a single 8× H200 / 8× MI300X node.</li>
+<li><strong>It's MoE</strong>: 42B active params mean tokens/s is far better than a dense 816B — but VRAM must still hold <em>all</em> 816B of weights.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How much VRAM does Muse Spark Open need?</h3>
+<p>816B parameters → 1,632GB in BF16, 816GB in FP8, 408GB in the official NVFP4 variant. Add ~8% runtime overhead plus KV cache on top.</p>
+<h3>Can it run on a Mac Studio 512GB?</h3>
+<p>Yes — with the NVFP4 quantization (~465GB total incl. overhead). BF16/FP8 need multi-box or datacenter GPUs.</p>
+<h3>Is NVFP4 lossless?</h3>
+<p>No — 4-bit floating point trades some quality for 4× memory cut. Meta ships an official NVFP4 checkpoint, which signals production-grade quality at that precision for most tasks; run your own evals if precision matters.</p>
+<h3>Does GGUF Q4 work?</h3>
+<p>Community GGUF quants at ~0.58B/param land near 473GB weights — over one 512GB Mac once overhead is counted; plan for 2 boxes or NVFP4 instead.</p>
+
+<h2>Sources &amp; updates</h2>
+<ul>
+<li>Hugging Face — meta-models/Muse-Spark-Open-816B-A42B model card &amp; file tree (65 × ~25.1GB BF16 shards, NVFP4 sibling repo), retrieved 2026-10-16</li>
+<li>More tools on our <a href="index.html">calculator hub</a> · Muse-family pricing: <a href="muse-wonder-api-cost-calculator.html">Muse Wonder API cost calculator</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<footer>
+<p>© 2026 AI API Calc — independent tool, not affiliated with Meta. Verify weights and quant options at huggingface.co before buying hardware.</p>
+</footer>
+</div>
+<script>
+(function(){
+var P=816;
+function val(id){return document.getElementById(id).value}
+function num(x){return parseFloat(x)||0}
+function calc(){
+  var bp = val('bp')==='custom' ? Math.max(num(val('bpCustom')),0.25) : num(val('bp'));
+  var ovh = num(val('ovh'))/100;
+  var kv = Math.max(num(val('kv')),0);
+  var pool = val('gpu')==='custom' ? Math.max(num(val('gpuCustom')),8) : num(val('gpu'));
+  var w = P*bp;
+  var t = w*(1+ovh)+kv;
+  document.getElementById('rW').textContent = w.toLocaleString('en-US',{maximumFractionDigits:0})+' GB';
+  document.getElementById('rT').textContent = t.toLocaleString('en-US',{maximumFractionDigits:0})+' GB';
+  var fits = t<=pool;
+  document.getElementById('rF').textContent = fits?'YES':'NO';
+  document.getElementById('rF').className = 'v '+(fits?'ok':'');
+  var head = pool-t;
+  document.getElementById('rH').textContent = (fits?'+':'')+Math.round(head)+' GB';
+}
+document.getElementById('bp').addEventListener('change',function(){
+  document.getElementById('customWrap').style.display = this.value==='custom'?'block':'none'; calc();});
+document.getElementById('gpu').addEventListener('change',function(){
+  document.getElementById('gpuCustomWrap').style.display = this.value==='custom'?'block':'none'; calc();});
+['bpCustom','ovh','kv','gpuCustom'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',calc);});
+calc();
+})();
+</script>
+</body>
+</html>
