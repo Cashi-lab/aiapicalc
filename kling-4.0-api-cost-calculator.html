@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kling 4.0 API Cost Calculator — Pricing Tracker & Estimator (2026)</title>
+<meta name="description" content="Kling 4.0 API cost calculator and pricing tracker. Official rates not yet published — estimate video generation budgets now, updated the day pricing drops.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/kling-4.0-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kling 4.0 API Cost Calculator — Pricing Tracker & Estimator (2026)">
+<meta property="og:description" content="Kling 4.0 API cost calculator and pricing tracker. Official rates not yet published — estimate video generation budgets now, updated the day pricing drops.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Kling <span>4.0</span> API Cost Calculator</h1>
+<p class="sub"><strong>Kling 4.0</strong> API pricing tracker + budget estimator. Official rates land here on launch day.</p>
+</header>
+
+<div class="warn">⚠️ Kling 4.0 API pricing is <strong>not yet published</strong> (announced 2026-09-27; API "coming soon"). This page tracks the launch and hosts a estimator you can drive with expected prices. Official rates will be added the day they drop.</div>
+<div class="grid">
+<div><label for="vids">Videos / day</label><input id="vids" type="number" min="0" step="5" value="50"></div>
+<div><label for="price">Assumed price / 5s video (USD)</label><input id="price" type="number" min="0" step="0.01" value="0.15"></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Estimated total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+<h2>What we know so far</h2>
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>Announce</td><td>2026-09-27 (Kling 4.0), Flash early access 09-28</td></tr>
+<tr><td>API status</td><td>Not yet launched; third-party reapi.ai reports "API coming"</td></tr>
+<tr><td>Pricing</td><td>Unpublished — Kling 3.x API charged per generated video by duration/mode</td></tr>
+<tr><td>Competition</td><td>VEO-class APIs bill ~$0.10–$0.60 per clip; expect Kling to undercut</td></tr>
+</table>
+<h3>Why a placeholder page?</h3>
+<ul>
+<li><strong>First-mover capture</strong> — when pricing drops, "kling 4 api pricing" searches land on calculators that already rank. This page exists to rank before launch day.</li>
+<li><strong>Book your budget scenario</strong> — slide the assumed price to model best/worst cases now.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>When does the Kling 4.0 API launch?</h3>
+<p>No official date yet (as of 2026-10-16). Watch this page — we update on launch day.</p>
+<h3>How will Kling 4.0 be billed?</h3>
+<p>Kling's API historically bills per generated video (duration × mode), unlike token-billed LLMs. The estimator above uses per-video pricing.</p>
+<h3>Subscribe for the update?</h3>
+<p>Bookmark this page — the calculator switches to official rates within hours of publication.</p>
+
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=1)return "$"+n.toFixed(2);return "$"+n.toFixed(3)}
+function calc(){
+  var vids=parseFloat($("vids").value)||0;
+  var price=parseFloat($("price").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  $("rDay").textContent=fmt(vids*price);
+  $("rMonth").textContent=fmt(vids*price*d);
+}
+["vids","price","days"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Pricing verified 2026-10-16 — OpenRouter public model listings &amp; official provider docs.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+</body>
+</html>

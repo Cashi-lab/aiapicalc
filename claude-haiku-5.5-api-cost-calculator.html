@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Haiku 5.5 API Cost Calculator — Token & Caching Pricing (2026)</title>
+<meta name="description" content="Free Claude Haiku 5.5 API cost calculator. Estimate anthropic claude-haiku-5.5 costs: $0.10/M input, $0.50/M output, $0.01/M cached, batch −50%, 1M context.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/claude-haiku-5.5-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Claude Haiku 5.5 API Cost Calculator — Token & Caching Pricing (2026)">
+<meta property="og:description" content="Free Claude Haiku 5.5 API cost calculator. Estimate anthropic claude-haiku-5.5 costs: $0.10/M input, $0.50/M output, $0.01/M cached, batch −50%, 1M context.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Claude Haiku <span>5.5</span> API Cost Calculator</h1>
+<p class="sub">Estimate <strong>claude-haiku-5.5</strong> API costs — Anthropic's fast tier for high-volume work. Caching, batch, 1M context.</p>
+</header>
+
+<div class="grid">
+<div><label for="reqs">Requests / day</label><input id="reqs" type="number" min="0" step="10" value="100"></div>
+<div><label for="tin">Input tokens / request</label><input id="tin" type="number" min="0" step="1000" value="8000"></div>
+<div><label for="tout">Output tokens / request</label><input id="tout" type="number" min="0" step="100" value="1500"></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="22">22 weekdays</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+<div><label for="mode">Pricing mode</label><select id="mode"><option value="std" selected>Standard</option><option value="batch">Batch (−50%)</option></select></div>
+<div><label for="cache">Cache hit rate on input</label><select id="cache"><option value="0" selected>0%</option><option value="0.5">50%</option><option value="0.8">80%</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / request</div><div class="v" id="rReq">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Total / month</div><div class="v" id="rMonth">$—</div></div>
+<div class="card"><div class="k">Cache savings / mo</div><div class="v" id="rSave">$—</div></div>
+</div>
+<h2>Claude Haiku 5.5 official pricing (per 1M tokens, USD)</h2>
+<table>
+<tr><th>Component</th><th class="num">Standard</th><th class="num">Batch (−50%)</th></tr>
+<tr><td>Input</td><td class="num">$0.10</td><td class="num">$0.05</td></tr>
+<tr><td>Output</td><td class="num">$0.50</td><td class="num">$0.25</td></tr>
+<tr><td>Cached input (read)</td><td class="num">$0.01</td><td class="num">$0.005</td></tr>
+</table>
+<p class="sub" style="margin-top:6px">Context window: 1M tokens. Positioned as Anthropic's small, fast model for high-volume, cost-sensitive work.</p>
+<h2>Typical workloads</h2>
+<table>
+<tr><th>Job shape</th><th class="num">Cost / request</th></tr>
+<tr><td>8k in / 1.5k out (agent step)</td><td class="num">$0.0016</td></tr>
+<tr><td>50k in / 4k out (doc analysis)</td><td class="num">$0.0070</td></tr>
+<tr><td>500k in / 8k out (long context)</td><td class="num">$0.054</td></tr>
+</table>
+<h3>Cost levers</h3>
+<ul>
+<li><strong>Cache aggressively</strong> — Claude's prompt caching drops input to $0.01/M; agent loops with stable system prompts save ~90% on input.</li>
+<li><strong>Batch API</strong> — 50% off for async workloads.</li>
+<li><strong>Reserve Opus/Sonnet for hard steps</strong> — route summarization, extraction, routing to Haiku 5.5.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>Claude Haiku 5.5 vs bigger Claude models — when is it enough?</h3>
+<p>High-volume, latency-sensitive, cost-sensitive work: summarization, classification, structured extraction, tool routing. Escalate only the hard steps.</p>
+<h3>How cheap is it really?</h3>
+<p>$0.0016 for a typical 8k-in/1.5k-out step — about 1/12th of Mistral Large 4 and roughly 1/40th of frontier-flagship rates.</p>
+<h3>1M context on a small model?</h3>
+<p>Yes — Haiku 5.5 supports 1M tokens, making cheap long-document processing practical.</p>
+
+<script>
+(function(){
+"use strict";
+var P={std:{in:0.1,out:0.5,cache:0.01},batch:{in:0.05,out:0.25,cache:0.01}};
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=100)return "$"+n.toFixed(0);if(n>=1)return "$"+n.toFixed(2);if(n>=0.01)return "$"+n.toFixed(3);return "$"+n.toFixed(4)}
+function calc(){
+  var reqs=parseFloat($("reqs").value)||0;
+  var tin=parseFloat($("tin").value)||0;
+  var tout=parseFloat($("tout").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var p=P[$("mode").value];
+  var cr=parseFloat($("cache").value)||0;
+  var cacheRate=($("mode").value==="batch")?0:cr;
+  var inCost=tin/1e6*(p.in*(1-cacheRate)+p.cache*cacheRate);
+  var outCost=tout/1e6*p.out;
+  var per=inCost+outCost;
+  $("rReq").textContent=fmt(per);
+  $("rDay").textContent=fmt(per*reqs);
+  $("rMonth").textContent=fmt(per*reqs*d);
+  $("rSave").textContent=fmt(tin/1e6*cacheRate*reqs*d*(p.in-p.cache));
+}
+["reqs","tin","tout","days","mode","cache"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Pricing verified 2026-10-16 — OpenRouter public model listings &amp; official provider docs.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nano Banana 2.1 API Cost Calculator — Image Generation Pricing (2026)</title>
+<meta name="description" content="Free Nano Banana 2.1 API cost calculator. Estimate gemini-nano-banana-2.1 costs: $0.0336 per 1K image, $0.0504 per 2K, $0.113 per 4K, batch −50%. Official Google pricing.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/nano-banana-2.1-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nano Banana 2.1 API Cost Calculator — Image Generation Pricing (2026)">
+<meta property="og:description" content="Free Nano Banana 2.1 API cost calculator. Estimate gemini-nano-banana-2.1 costs: $0.0336 per 1K image, $0.0504 per 2K, $0.113 per 4K, batch −50%. Official Google pricing.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Nano Banana <span>2.1</span> API Cost Calculator</h1>
+<p class="sub">Estimate <strong>gemini-nano-banana-2.1</strong> costs — per-image by resolution, multi-turn editing, batch mode. Official Google pricing.</p>
+</header>
+
+<div class="grid">
+<div><label for="imgs">Images / day</label><input id="imgs" type="number" min="0" step="10" value="100"></div>
+<div><label for="res">Output resolution</label><select id="res"><option value="r1k" selected>1K</option><option value="r2k">2K</option><option value="r4k">4K</option></select></div>
+<div><label for="mode">Pricing mode</label><select id="mode"><option value="std" selected>Standard</option><option value="batch">Batch (−50%)</option></select></div>
+<div><label for="ptok">Prompt tokens / image</label><input id="ptok" type="number" min="0" step="50" value="200"></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Image cost each</div><div class="v" id="rImg">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+<h2>gemini-nano-banana-2.1 official pricing (USD)</h2>
+<table>
+<tr><th>Component</th><th class="num">Standard</th><th class="num">Batch (−50%)</th></tr>
+<tr><td>Input (text/image/video)</td><td class="num">$1.50 / 1M tok</td><td class="num">$0.75 / 1M tok</td></tr>
+<tr><td>Text output</td><td class="num">$7.50 / 1M tok</td><td class="num">$3.75 / 1M tok</td></tr>
+<tr><td>Image output</td><td class="num">$30.00 / 1M tok</td><td class="num">$15.00 / 1M tok</td></tr>
+<tr><td>1K image</td><td class="num">$0.0336</td><td class="num">$0.0168</td></tr>
+<tr><td>2K image</td><td class="num">$0.0504</td><td class="num">$0.0252</td></tr>
+<tr><td>4K image</td><td class="num">$0.113</td><td class="num">$0.0567</td></tr>
+</table>
+<p class="sub" style="margin-top:6px">Google official (ai.google.dev), verified 2026-10-16. Multi-turn editing: each turn re-sends the conversation at input rates; only the final image tokens bill at image rates.</p>
+<h2>Typical workloads</h2>
+<table>
+<tr><th>Job shape</th><th class="num">Cost</th></tr>
+<tr><td>Single 1K image, short prompt</td><td class="num">≈ $0.034</td></tr>
+<tr><td>5-turn edit session @ 2K</td><td class="num">≈ $0.30–0.45</td></tr>
+<tr><td>1,000 images/day @ 1K (batch)</td><td class="num">≈ $542/mo incl. text</td></tr>
+</table>
+<h3>Cost levers</h3>
+<ul>
+<li><strong>Batch mode halves everything</strong> — for bulk generation pipelines, −50% is the single biggest lever.</li>
+<li><strong>Stay at 1K unless needed</strong> — 4K images cost 3.4× more per image.</li>
+<li><strong>Trim edit history</strong> — multi-turn edits re-send prior turns' tokens at $1.50/M input.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>Is Nano Banana 2.1 the same as Gemini 3.1 Flash Image?</h3>
+<p>NB 2.1 is the update to Nano Banana 2 (Gemini 3.1 Flash Image) — improved quality, character consistency, text rendering, and search-grounded generation at 1K/2K/4K.</p>
+<h3>Why does image output cost "per 1M tokens"?</h3>
+<p>Images are tokenized: a 1K image ≈ 1,120 output tokens, 2K ≈ 1,680, 4K ≈ 3,767 — that's where $0.0336/$0.0504/$0.113 come from.</p>
+<h3>Free tier?</h3>
+<p>Not available for NB 2.1 output; it's paid-tier only.</p>
+
+<script>
+(function(){
+"use strict";
+var IMG={std:{r1k:0.0336,r2k:0.0504,r4k:0.113},batch:{r1k:0.0168,r2k:0.0252,r4k:0.0567}};
+var TXT_IN=1.50, TXT_OUT=7.50;
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=100)return "$"+n.toFixed(0);if(n>=1)return "$"+n.toFixed(2);if(n>=0.01)return "$"+n.toFixed(3);return "$"+n.toFixed(4)}
+function calc(){
+  var imgs=parseFloat($("imgs").value)||0;
+  var res=$("res").value;
+  var mode=$("mode").value;
+  var promptTok=parseFloat($("ptok").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var perImg=IMG[mode][res];
+  var per=perImg + promptTok/1e6*TXT_IN + 300/1e6*TXT_OUT;
+  $("rImg").textContent=fmt(perImg);
+  $("rDay").textContent=fmt(per*imgs);
+  $("rMonth").textContent=fmt(per*imgs*d);
+}
+["imgs","res","mode","ptok","days"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Pricing verified 2026-10-16 — OpenRouter public model listings &amp; official provider docs.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+</body>
+</html>
