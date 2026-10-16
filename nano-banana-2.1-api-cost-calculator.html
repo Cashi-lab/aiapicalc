@@ -39,9 +39,43 @@ ul{padding-left:20px;margin:8px 0}
 .warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
 code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
 footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
-a{color:var(--acc)}</style>
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+.gh{font-size:1.02rem;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;margin:26px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{font-size:.78rem;color:#7db1ff;border:1px solid #24446e;background:#10151d;border-radius:20px;padding:3px 12px}
+.item .t .ph{float:right;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#7db1ff;font-weight:600;margin-left:10px}
+.cmp{display:grid;gap:10px;margin-top:8px}
+.cmp a{display:block;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:13px 16px;text-decoration:none}
+.cmp a:hover{border-color:var(--glow)}
+.cmp strong{color:#e6edf3;font-size:.95rem}
+.cmp span{display:block;color:var(--mut);font-size:.84rem;margin-top:3px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Nano Banana 2.1 API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/nano-banana-2.1-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "Nano Banana 2.1 API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/nano-banana-2.1-api-cost-calculator.html"}]}</script>
 </head>
 <body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
 <div class="wrap">
 <header>
 <h1>Nano Banana <span>2.1</span> API Cost Calculator</h1>
@@ -126,9 +160,35 @@ We publish daily AI-driven market signals every trading day on the WeChat Offici
 <span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
 </section>
 
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="gemini-4-argon-api-cost-calculator.html">Gemini 4 Argon cost calculator</a> — $2/M in · $10/M out · Dec 1 price doubling included</li>
+<li><a href="grok-voice-3-api-cost-calculator.html">Grok Voice 3 realtime audio cost calculator</a> — $0.08/min realtime audio · voice-agent budget planner</li>
+<li><a href="gpt-6-luna-api-cost-calculator.html">GPT-6 Luna cost calculator</a> — $0.10/M in · $0.50/M out · value tier</li>
+</ul>
 <footer>
 <p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
 </footer>
 </div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
 </body>
 </html>

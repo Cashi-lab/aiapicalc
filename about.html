@@ -32,8 +32,40 @@ ul{padding-left:20px;margin:8px 0}
 .warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
 code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
 footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
-a{color:var(--acc)}</style></head>
-<body><div class="wrap">
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+.gh{font-size:1.02rem;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;margin:26px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{font-size:.78rem;color:#7db1ff;border:1px solid #24446e;background:#10151d;border-radius:20px;padding:3px 12px}
+.item .t .ph{float:right;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#7db1ff;font-weight:600;margin-left:10px}
+.cmp{display:grid;gap:10px;margin-top:8px}
+.cmp a{display:block;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:13px 16px;text-decoration:none}
+.cmp a:hover{border-color:var(--glow)}
+.cmp strong{color:#e6edf3;font-size:.95rem}
+.cmp span{display:block;color:var(--mut);font-size:.84rem;margin-top:3px}
+</style></head>
+<body>
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
 <header><h1>About <span>AI API Calc</span></h1>
 <p class="sub">Know your bill before you build.</p></header>
 <p>AI API Calc is a collection of free calculators for AI model APIs. Every price on this site is pulled from official provider documentation or public model listings, and each page shows its verification date.</p>

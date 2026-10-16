@@ -22,59 +22,104 @@ h1{font-size:1.7rem}
 .item .tag{display:inline-block;font-size:.72rem;color:#58a6ff;border:1px solid #1f4e7a;border-radius:20px;padding:1px 9px;margin-top:8px}
 .item .tag.wait{color:#e3b341;border-color:#9e6a03}
 footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+.gh{font-size:1.02rem;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;margin:26px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{font-size:.78rem;color:#7db1ff;border:1px solid #24446e;background:#10151d;border-radius:20px;padding:3px 12px}
+.item .t .ph{float:right;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#7db1ff;font-weight:600;margin-left:10px}
+.cmp{display:grid;gap:10px;margin-top:8px}
+.cmp a{display:block;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:13px 16px;text-decoration:none}
+.cmp a:hover{border-color:var(--glow)}
+.cmp strong{color:#e6edf3;font-size:.95rem}
+.cmp span{display:block;color:var(--mut);font-size:.84rem;margin-top:3px}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "AI API Calc", "url": "https://cashi-lab.github.io/aiapicalc/"}</script>
 </head>
 <body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="about.html">About</a></span></nav>
 <div class="wrap">
 <h1>AI API Cost Calculators</h1>
 <p class="sub">Know your bill before you build. Free calculators for every major model release — token, realtime-voice, image, and video pricing from official docs. All math runs in your browser.</p>
+<div class="chips"><span class="chip">9 free calculators</span><span class="chip">$0 always</span><span class="chip">no signup</span><span class="chip">runs in your browser</span></div>
 
+<div class="gh">Latest releases</div>
 <div class="list">
 <a class="item" href="gemini-4-argon-api-cost-calculator.html">
-<div class="t">Gemini 4 Argon API Cost Calculator</div>
+<div class="t">Gemini 4 Argon API Cost Calculator<span class="ph">$2/M in</span></div>
 <div class="d">$2/M in · $10/M out · implicit cache · 1M-token context · batch −50% · Dec 1 price change included</div>
 <span class="tag">NEW · Oct 13 release</span>
 </a>
 <a class="item" href="grok-voice-3-api-cost-calculator.html">
-<div class="t">Grok Voice 3 API Cost Calculator</div>
+<div class="t">Grok Voice 3 API Cost Calculator<span class="ph">$0.08/min</span></div>
 <div class="d">$0.08/min realtime audio · $0.10/min PSTN · $4/M text-in · voice-agent budget planner</div>
 <span class="tag">NEW · Oct 14 release</span>
 </a>
+<div class="gh">Text &amp; reasoning</div>
 <a class="item" href="gpt-6-luna-api-cost-calculator.html">
-<div class="t">GPT-6 Luna API Cost Calculator</div>
+<div class="t">GPT-6 Luna API Cost Calculator<span class="ph">$0.10/M in</span></div>
 <div class="d">$0.10/M in · $0.50/M out · $0.01/M cached · batch −50% · 1.05M context · Luna Pro same price</div>
 <span class="tag">Value tier</span>
 </a>
 <a class="item" href="claude-haiku-5.5-api-cost-calculator.html">
-<div class="t">Claude Haiku 5.5 API Cost Calculator</div>
+<div class="t">Claude Haiku 5.5 API Cost Calculator<span class="ph">$0.10/M in</span></div>
 <div class="d">$0.10/M in · $0.50/M out · $0.01/M cached · batch −50% · 1M context</div>
 <span class="tag">Fast tier</span>
 </a>
 <a class="item" href="mistral-large-4-api-cost-calculator.html">
-<div class="t">Mistral Large 4 API Cost Calculator</div>
+<div class="t">Mistral Large 4 API Cost Calculator<span class="ph">$0.68/M in</span></div>
 <div class="d">$0.68/M in · $2.09/M out · $0.07/M cached · 1M context · multimodal input</div>
 <span class="tag">Mid-premium</span>
 </a>
 <a class="item" href="muse-wonder-api-cost-calculator.html">
-<div class="t">Muse Wonder API Cost Calculator</div>
+<div class="t">Muse Wonder API Cost Calculator<span class="ph">$4/M in</span></div>
 <div class="d">$4/M in · $20/M out · $0.20/M cached · 1M context · Meta frontier reasoning</div>
 <span class="tag">Frontier</span>
 </a>
+<div class="gh">Self-host / VRAM</div>
 <a class="item" href="muse-spark-open-vram-calculator.html">
-<div class="t">Muse Spark Open VRAM Calculator</div>
+<div class="t">Muse Spark Open VRAM Calculator<span class="ph">816GB FP8</span></div>
 <div class="d">816B-A42B MoE memory by quant — BF16 1632GB / FP8 816GB / NVFP4 408GB weights, GPU fit checker</div>
 <span class="tag">VRAM · Open weights</span>
 </a>
+<div class="gh">Image &amp; video</div>
 <a class="item" href="nano-banana-2.1-api-cost-calculator.html">
-<div class="t">Nano Banana 2.1 API Cost Calculator</div>
+<div class="t">Nano Banana 2.1 API Cost Calculator<span class="ph">$0.034/1K</span></div>
 <div class="d">$0.0336 per 1K image · $0.0504 per 2K · $0.113 per 4K · batch −50% · multi-turn editing costs</div>
 <span class="tag">Image gen</span>
 </a>
 <a class="item" href="kling-4.0-api-cost-calculator.html">
-<div class="t">Kling 4.0 API Cost Calculator</div>
+<div class="t">Kling 4.0 API Cost Calculator<span class="ph">estimator</span></div>
 <div class="d">Pricing not yet published — budget estimator live now, official rates land on launch day</div>
 <span class="tag wait">Tracker · API pending</span>
 </a>
+</div>
+
+<div class="gh">Popular comparisons</div>
+<div class="cmp">
+<a href="gpt-6-luna-api-cost-calculator.html"><strong>GPT-6 Luna vs Claude Haiku 5.5 — identical pricing, different temperament</strong><span>Both $0.10/M in · $0.50/M out. Compare cache and batch behavior side by side.</span></a>
+<a href="gemini-4-argon-api-cost-calculator.html"><strong>Gemini 4 Argon before vs after Dec 1 price doubling</strong><span>Input $2→$4, output $10→$20 per 1M tokens — see what your monthly bill becomes.</span></a>
+<a href="nano-banana-2.1-api-cost-calculator.html"><strong>Nano Banana 2.1 image costs at 1K vs 2K vs 4K</strong><span>Per-image pricing ladders from $0.034 — pick the resolution that fits your budget.</span></a>
 </div>
 
 <section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
