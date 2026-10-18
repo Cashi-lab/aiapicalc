@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiMo V2.6 VRAM Calculator — Pro 1.02T / Flash 309B / 9B Memory Requirements by Quantization (2026)</title>
+<meta name="description" content="Xiaomi MiMo V2.6 VRAM calculator. Pro 1.02T-A42B needs 566GB (official FP8 checkpoint) or 2048GB BF16; Flash 309B-A15B 173GB; Distill 9B 18.8GB. Quant math + GPU fit checker.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/mimo-v2.6-vram-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MiMo V2.6 VRAM Calculator">
+<meta property="og:description" content="Pro 1.02T / Flash 309B / Distill 9B memory by quant — official 566GB FP8 checkpoint, BF16, INT4. GPU fit for Mac Studio 512GB, H100, H200, B200, RTX 5090.">
+<meta name="robots" content="index,follow">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.card .ok{color:var(--ok)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+
+/* == V2 design == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MiMo V2.6 VRAM Calculator", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/mimo-v2.6-vram-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "MiMo V2.6 VRAM Calculator", "item": "https://cashi-lab.github.io/aiapicalc/mimo-v2.6-vram-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much VRAM does MiMo V2.6 Pro need?", "acceptedAnswer": {"@type": "Answer", "text": "The official Pro checkpoint is 566GB (FP8 weights) — about 627GB total with runtime overhead and KV cache, needing 8x H100 80GB, 8x H200, or 2x Mac Studio 512GB. A full BF16 copy is 2,048GB of weights."}}, {"@type": "Question", "name": "Can MiMo V2.6 Flash run on a Mac Studio 512GB?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — the official Flash checkpoint is 173GB (203GB total with overhead), which fits a single 512GB Mac Studio with room to spare, and also fits 4x H100 80GB (320GB pooled)."}}, {"@type": "Question", "name": "Can MiMo V2.6 Distill 9B run on a single consumer GPU?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — 18.8GB in BF16 (~22.3GB total), fits an RTX 4090 24GB or RTX 5090 32GB. A Q4 GGUF quant is about 5.5GB weights, leaving KV headroom even on 16GB cards."}}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>MiMo V2.6 <span>VRAM Calculator</span></h1>
+<p class="sub">Memory requirements for Xiaomi's <strong>MiMo-V2.6</strong> series — <strong>Pro 1.02T-A42B</strong>, <strong>Flash 309B-A15B</strong>, <strong>Distill-Qwen 9B</strong> — by quantization, with a GPU fit checker.</p>
+</header>
+
+<div class="grid">
+<div>
+<label for="tier">Model tier</label>
+<select id="tier">
+<option value="566.0">Pro — 1.02T total / 42B active MoE</option>
+<option value="172.9">Flash — 309B total / 15B active MoE</option>
+<option value="18.8">Distill-Qwen 9B — dense (Qwen3.5 base)</option>
+</select>
+</div>
+<div>
+<label for="bp">Quantization (bytes/param)</label>
+<select id="bp">
+<option value="0.553">Official checkpoint — ~0.55 B/param (FP8 MoE + BF16 attention)</option>
+<option value="2">BF16 — 2.00 B/param</option>
+<option value="1">FP8 / INT8 — 1.00 B/param</option>
+<option value="0.5">INT4 / NVFP4 — 0.50 B/param</option>
+<option value="0.58">GGUF Q4_K_M — ~0.58 B/param (est.)</option>
+<option value="custom">Custom…</option>
+</select>
+</div>
+<div id="customWrap" style="display:none">
+<label for="bpCustom">Custom bytes/param</label>
+<input id="bpCustom" type="number" min="0.25" max="8" step="0.01" value="0.5">
+</div>
+<div>
+<label for="ovh">Runtime overhead (%)</label>
+<input id="ovh" type="number" min="0" max="50" step="1" value="8">
+</div>
+<div>
+<label for="kv">KV-cache allowance (GB)</label>
+<input id="kv" type="number" min="0" max="512" step="4" value="16">
+</div>
+<div>
+<label for="gpu">GPU pool VRAM (GB total)</label>
+<select id="gpu">
+<option value="512">Mac Studio 512GB unified ×1</option>
+<option value="1024">Mac Studio 512GB ×2</option>
+<option value="320">H100 80GB ×4</option>
+<option value="640">H100 80GB ×8</option>
+<option value="1128">H200 141GB ×8</option>
+<option value="1536">B200 192GB ×8</option>
+<option value="32">RTX 5090 32GB ×1</option>
+<option value="24">RTX 4090 24GB ×1</option>
+<option value="custom">Custom…</option>
+</select>
+</div>
+<div id="gpuCustomWrap" style="display:none">
+<label for="gpuCustom">Custom total VRAM (GB)</label>
+<input id="gpuCustom" type="number" min="8" max="8192" step="8" value="512">
+</div>
+</div>
+
+<div class="results">
+<div class="card"><div class="k">Weights</div><div class="v" id="rW">—</div></div>
+<div class="card fee"><div class="k">Total required</div><div class="v" id="rT">—</div></div>
+<div class="card"><div class="k">Fit</div><div class="v" id="rF">—</div></div>
+<div class="card"><div class="k">Headroom</div><div class="v" id="rH">—</div></div>
+</div>
+
+<h2>Verified baseline numbers</h2>
+<p>Parameter counts are exact totals from the Hugging Face safetensors metadata (Pro 1,024.2B / Flash 310.8B / 9B 9.41B). The "official checkpoint" row is the real <code>model.safetensors.index.json</code> size — Xiaomi ships MoE experts in FP8 with BF16 attention (~0.553 B/param average), so the shipped repo is already half of naive FP8 math.</p>
+<table>
+<tr><th>Tier</th><th class="num">Params</th><th class="num">Official ckpt (~0.553)</th><th class="num">BF16</th><th class="num">INT4</th></tr>
+<tr><td>Pro (1.02T-A42B)</td><td class="num">1,024.2B</td><td class="num">566.0</td><td class="num">2,048.4</td><td class="num">512.1</td></tr>
+<tr><td>Flash (309B-A15B)</td><td class="num">310.8B</td><td class="num">172.9</td><td class="num">621.5</td><td class="num">155.4</td></tr>
+<tr><td>Distill 9B (dense)</td><td class="num">9.41B</td><td class="num">18.8 (BF16)</td><td class="num">18.8</td><td class="num">4.7</td></tr>
+</table>
+<p class="sub">Weights in GB (decimal). Total = weights × 1.08 runtime overhead + KV cache (16GB default for the MoE tiers, 2GB for 9B).</p>
+
+<h2>Hardware fit matrix</h2>
+<table>
+<tr><th>Hardware pool</th><th class="num">VRAM (GB)</th><th class="num">Pro official</th><th class="num">Pro INT4</th><th class="num">Flash official</th><th class="num">9B BF16</th></tr>
+<tr><td>Mac Studio 512GB unified</td><td class='num'>512</td><td class='num'>❌ 627GB</td><td class='num'>❌ 569GB</td><td class='num'>✅ 203GB</td><td class='num'>✅ 22GB</td></tr>
+<tr><td>2× Mac Studio 512GB</td><td class='num'>1024</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>4× H100 80GB</td><td class='num'>320</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>✅ 203GB</td><td class='num'>✅ fits</td></tr>
+<tr><td>8× H100 80GB</td><td class='num'>640</td><td class='num'>✅ 627GB</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>8× H200 141GB</td><td class='num'>1128</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>8× B200 192GB</td><td class='num'>1536</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td><td class='num'>✅ fits</td></tr>
+<tr><td>RTX 5090 32GB</td><td class='num'>32</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>✅ 22GB</td></tr>
+<tr><td>RTX 4090 24GB</td><td class='num'>24</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>❌</td><td class='num'>✅ 22GB (tight)</td></tr>
+</table>
+<p class="sub">Fit = weights × 1.08 + KV ≤ pooled VRAM. Multi-GPU assumes tensor-parallel pooling; real interconnect overhead adds a few percent.</p>
+
+<div class="warn"><strong>Single Mac Studio 512GB:</strong> Pro does <em>not</em> fit one box — even INT4 lands at 569GB total. It's Pro on 2× Mac / 8× H100-class, or drop to Flash, which fits a single 512GB Mac with ~300GB to spare.</div>
+
+<h2>Reading the results like a pro</h2>
+<ul>
+<li><strong>The official checkpoint is already quantized</strong>: 566GB for 1.02T params (~0.553 B/param) — experts in FP8, attention in BF16. Rebuilding naive FP8 (1,024GB) or BF16 (2,048GB) buys headroom, not a new tier of hardware.</li>
+<li><strong>MoE economics</strong>: Pro activates only 42B of 1,024B params per token (Flash 15B of 311B) — tokens/s runs like a mid-size dense model, but VRAM must hold every expert. The 9B distill is the one tier that behaves like a normal local model.</li>
+<li><strong>1M-token context is the hidden cost</strong>: the default 16GB KV allowance is a short-context figure; long-context serving multiplies KV needs. Budget accordingly before buying hardware.</li>
+<li><strong>9B is the consumer tier</strong>: Qwen3.5-9B base, MIT license, 18.8GB BF16 → single RTX 4090/5090; Q4 GGUF (~5.5GB) opens 16GB cards.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How much VRAM does MiMo V2.6 Pro need?</h3>
+<p>The official FP8 checkpoint is 566GB of weights — ~627GB total with overhead and KV cache. That's 8× H100 80GB (640GB, just barely), 8× H200, or 2× Mac Studio 512GB. A full BF16 copy is 2,048GB.</p>
+<h3>Can MiMo V2.6 Flash run on a Mac Studio 512GB?</h3>
+<p>Yes — the official checkpoint needs ~203GB total, fitting a single 512GB Mac Studio or even 4× H100 80GB pooled. Flash is the sweet spot for serious local deployment.</p>
+<h3>Can MiMo V2.6 Distill 9B run on one consumer GPU?</h3>
+<p>Yes — 18.8GB BF16 (~22.3GB total) fits an RTX 4090 24GB tightly or an RTX 5090 32GB comfortably; a Q4 quant (~5.5GB weights) runs on 16GB cards.</p>
+<h3>Does the official checkpoint lose quality vs BF16?</h3>
+<p>FP8 expert weights + BF16 attention is the precision Xiaomi itself ships and serves; treat it as the reference quality. Only rebuild BF16 if you need to fine-tune or audit at full precision.</p>
+
+<h2>Sources &amp; updates</h2>
+<ul>
+<li>Hugging Face — <a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL" rel="noopener">XiaomiMiMo/MiMo-V2.6-Pro-RL</a>, <a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL" rel="noopener">MiMo-V2.6-Flash-RL</a>, <a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B" rel="noopener">MiMo-V2.6-Distill-Qwen-9B</a> — model cards + safetensors metadata, retrieved 2026-10-18</li>
+<li>Xiaomi MiMo <a href="https://mimo.xiaomi.com/mimo-v2-6" rel="noopener">V2.6 blog</a> &amp; technical report (1M context, 42B/15B active params, MIT license)</li>
+<li>More tools on our <a href="index.html">calculator hub</a> · MoE sibling page: <a href="muse-spark-open-vram-calculator.html">Muse Spark Open 816B VRAM calculator</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="muse-spark-open-vram-calculator.html">Muse Spark Open 816B VRAM calculator</a> — 816B-A42B MoE: BF16 1632GB / FP8 816GB / NVFP4 408GB</li>
+<li><a href="gpt-6-luna-api-cost-calculator.html">GPT-6 Luna cost calculator</a> — $0.10/M in · $0.50/M out · value tier</li>
+<li><a href="claude-haiku-5.5-api-cost-calculator.html">Claude Haiku 5.5 cost calculator</a> — $0.10/M in · $0.50/M out · fast tier</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool, not affiliated with Xiaomi. Parameter counts and checkpoint sizes verified against the official Hugging Face repos on 2026-10-18; re-check before buying hardware.</p>
+</footer>
+</div>
+<script>
+(function(){
+var TIERS={ "566.0":566.0, "172.9":172.9, "18.8":18.8 };
+var PARAMS={ "566.0":1024.2, "172.9":310.8, "18.8":9.41 };
+function val(id){return document.getElementById(id).value}
+function num(x){return parseFloat(x)||0}
+function calc(){
+  var tier = val('tier');
+  var bp = val('bp')==='custom' ? Math.max(num(val('bpCustom')),0.25) : num(val('bp'));
+  var ovh = num(val('ovh'))/100;
+  var kv = Math.max(num(val('kv')),0);
+  var pool = val('gpu')==='custom' ? Math.max(num(val('gpuCustom')),8) : num(val('gpu'));
+  var w = bp===0.553 ? TIERS[tier] : PARAMS[tier]*bp;  // official ckpt = shipped repo size; others = params × B/param
+  var t = w*(1+ovh)+kv;
+  document.getElementById('rW').textContent = w.toLocaleString('en-US',{maximumFractionDigits:1})+' GB';
+  document.getElementById('rT').textContent = t.toLocaleString('en-US',{maximumFractionDigits:1})+' GB';
+  var fits = t<=pool;
+  document.getElementById('rF').textContent = fits?'YES':'NO';
+  document.getElementById('rF').className = 'v '+(fits?'ok':'');
+  var head = pool-t;
+  document.getElementById('rH').textContent = (fits?'+':'')+Math.round(head)+' GB';
+}
+document.getElementById('bp').addEventListener('change',function(){
+  document.getElementById('customWrap').style.display = this.value==='custom'?'block':'none'; calc();});
+document.getElementById('gpu').addEventListener('change',function(){
+  document.getElementById('gpuCustomWrap').style.display = this.value==='custom'?'block':'none'; calc();});
+document.getElementById('tier').addEventListener('change',function(){
+  var d9 = val('tier')==='18.8';
+  document.getElementById('kv').value = d9?2:16; calc();});
+['bpCustom','ovh','kv','gpuCustom'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',calc);});
+calc();
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/mimo-v2.6-vram-calculator.html";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
