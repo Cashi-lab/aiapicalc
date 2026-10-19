@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seedance 3.0 API Cost Calculator — Pricing Tracker &amp; Estimator (2026)</title>
+<meta name="description" content="Seedance 3.0 API cost calculator and pricing tracker. Not yet announced — estimate video budgets from official Seedance 2.5 rates, updated the day 3.0 pricing drops.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/seedance-3.0-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Seedance 3.0 API Cost Calculator — Pricing Tracker &amp; Estimator (2026)">
+<meta property="og:description" content="Seedance 3.0 API cost calculator and pricing tracker. Not yet announced — estimate video budgets from official Seedance 2.5 rates, updated the day 3.0 pricing drops.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Seedance 3.0 API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/seedance-3.0-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "Seedance 3.0 API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/seedance-3.0-api-cost-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When does Seedance 3.0 launch?", "acceptedAnswer": {"@type": "Answer", "text": "Seedance 3.0 has not been officially announced (as of 2026-10-19). BytePlus ModelArk currently tops out at Dreamina Seedance 2.5. Rumors point to a Q4 2026 reveal with 10-minute long-form video and native audio; this page updates on launch day."}}, {"@type": "Question", "name": "How much does the Seedance API cost?", "acceptedAnswer": {"@type": "Answer", "text": "Official Dreamina Seedance 2.5 pricing on BytePlus ModelArk (verified 2026-10-19): $0.514 per 5s 480p video ($0.103/s), $1.156 per 5s 720p video ($0.231/s), $2.843 per 5s 1080p video ($0.569/s). Video-to-video input costs more, up to $11.907 per 1080p clip."}}, {"@type": "Question", "name": "How will Seedance 3.0 be billed?", "acceptedAnswer": {"@type": "Answer", "text": "Unconfirmed. The series bills per generated video on token consumption that scales with resolution, duration and frame rate — effectively per-second pricing. The estimator above uses official 2.5 rates with a premium multiplier for 3.0 scenarios."}}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>Seedance <span>3.0</span> API Cost Calculator</h1>
+<p class="sub"><strong>Seedance 3.0</strong> pricing tracker + budget estimator. Official rates land here on launch day.</p>
+</header>
+
+<div class="warn">⚠️ Seedance 3.0 is <strong>not yet announced</strong> (as of 2026-10-19; BytePlus ModelArk tops out at Dreamina Seedance 2.5). This estimator runs on <strong>official 2.5 rates</strong> with a 3.0 premium multiplier you control. Official 3.0 pricing will be added within hours of publication.</div>
+<div class="grid">
+<div><label for="res">Resolution</label><select id="res"><option value="0.1028">480p — $0.103/s</option><option value="0.2312" selected>720p — $0.231/s</option><option value="0.5686">1080p — $0.569/s</option></select></div>
+<div><label for="secs">Seconds / video</label><input id="secs" type="number" min="1" step="1" value="5"></div>
+<div><label for="vids">Videos / day</label><input id="vids" type="number" min="0" step="5" value="50"></div>
+<div><label for="mult">3.0 price scenario</label><select id="mult"><option value="0.8">Cheaper — 0.8×</option><option value="1" selected>Same as 2.5 — 1.0×</option><option value="1.25">Premium — 1.25×</option><option value="1.5">Premium — 1.5×</option></select></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / video</div><div class="v" id="rVid">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Estimated total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+
+<h2>What we know so far</h2>
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>3.0 status</td><td>Not officially announced — rumors point to Q4 2026 with 10-minute long-form video + native audio (pilio.ai)</td></tr>
+<tr><td>Current flagship</td><td>Dreamina Seedance 2.5 on BytePlus ModelArk (docs updated 2026-10-18, verified 2026-10-19)</td></tr>
+<tr><td>API billing</td><td>Token-based, scales with resolution × duration × frame rate — effectively per-second (see table below)</td></tr>
+<tr><td>3.0 pricing</td><td>Unknown — model scenarios with the multiplier above; 2.5 → 3.0 historically repriced tiers, not just multiplied</td></tr>
+<tr><td>Hype check</td><td>10+ exact-match wrapper domains (seedance3.app/.cloud/.is…) already registered pre-announce</td></tr>
+</table>
+
+<h2>Official Seedance 2.5 baseline (verified 2026-10-19)</h2>
+<p>Prices from BytePlus ModelArk pricing docs — text-to-video, 16:9, per 5-second clip:</p>
+<table>
+<tr><th>Resolution</th><th class="num">Per 5s video</th><th class="num">Per second</th></tr>
+<tr><td>480p 16:9</td><td class="num">$0.514</td><td class="num">$0.103</td></tr>
+<tr><td>720p 16:9</td><td class="num">$1.156</td><td class="num">$0.231</td></tr>
+<tr><td>1080p 16:9</td><td class="num">$2.843</td><td class="num">$0.569</td></tr>
+</table>
+<p>Video-to-video (with video input, 2–30s input) costs more: 480p $0.553–2.152 · 720p $1.244–4.838 · 1080p $3.062–11.907 per clip.</p>
+
+<h3>Why a placeholder page?</h3>
+<ul>
+<li><strong>First-mover capture</strong> — when 3.0 drops, "seedance 3 api pricing" searches land on calculators that already rank. This page exists to rank before launch day.</li>
+<li><strong>Book your budget scenario</strong> — pick a resolution and multiplier to model best/worst cases now.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>When does Seedance 3.0 launch?</h3>
+<p>No official date (as of 2026-10-19). BytePlus ModelArk tops out at Dreamina Seedance 2.5. Watch this page — we update on launch day.</p>
+<h3>How much does the Seedance API cost today?</h3>
+<p>Official 2.5 rates: $0.103/s at 480p, $0.231/s at 720p, $0.569/s at 1080p (16:9). A 5s 720p clip is $1.156; the estimator above scales it to your volume.</p>
+<h3>How will Seedance 3.0 be billed?</h3>
+<p>Unconfirmed. The series bills per generated video via token consumption that scales with resolution, duration and frame rate. If 3.0 adds 10-minute outputs, expect per-second pricing to dominate budget planning even more.</p>
+
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=1)return "$"+n.toFixed(2);return "$"+n.toFixed(3)}
+function calc(){
+  var perSec=parseFloat($("res").value)||0;
+  var secs=parseFloat($("secs").value)||0;
+  var vids=parseFloat($("vids").value)||0;
+  var mult=parseFloat($("mult").value)||1;
+  var d=parseInt($("days").value,10)||30;
+  var perVid=perSec*secs*mult;
+  $("rVid").textContent=fmt(perVid);
+  $("rDay").textContent=fmt(vids*perVid);
+  $("rMonth").textContent=fmt(vids*perVid*d);
+}
+["res","secs","vids","mult","days"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Seedance 2.5 baseline verified 2026-10-19 — BytePlus ModelArk official pricing docs (updated 2026-10-18).</li>
+<li>3.0 status cross-checked: BytePlus ModelArk current lineup tops out at Seedance 2.5; no 3.0 listing.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="kling-4.0-api-cost-calculator.html">Kling 4.0 API cost calculator</a> — fellow pre-launch video tracker, estimator live now</li>
+<li><a href="nano-banana-2.1-api-cost-calculator.html">Nano Banana 2.1 image cost calculator</a> — $0.034/1K image · Google's image gen rates</li>
+<li><a href="mimo-v2.6-vram-calculator.html">MiMo V2.6 VRAM calculator</a> — 9B/309B/1.02T open-weights memory fit</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
