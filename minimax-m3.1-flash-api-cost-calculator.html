@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniMax M3.1 Flash API Cost Calculator — Agent Token Pricing (2026)</title>
+<meta name="description" content="Free MiniMax M3.1 Flash API cost calculator. Flat rates: $0.15/M input, $0.60/M output, $0.015/M cached input. Agentic workloads, live math, no signup.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/minimax-m3.1-flash-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MiniMax M3.1 Flash API Cost Calculator — Agent Token Pricing (2026)">
+<meta property="og:description" content="Free MiniMax M3.1 Flash API cost calculator. Flat rates: $0.15/M input, $0.60/M output, $0.015/M cached input. Agentic workloads, live math, no signup.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MiniMax M3.1 Flash API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/minimax-m3.1-flash-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "MiniMax M3.1 Flash API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/minimax-m3.1-flash-api-cost-calculator.html"}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>MiniMax <span>M3.1 Flash</span> API Cost Calculator</h1>
+<p class="sub">Estimate <strong>MiniMax-M3.1-Flash</strong> API costs — flat $0.15/M in · $0.60/M out · $0.015/M cached input. Built for agent loops, coding and computer-use workloads.</p>
+</header>
+
+<div class="grid">
+<div><label for="reqs">Requests / day</label><input id="reqs" type="number" min="0" step="10" value="100"></div>
+<div><label for="tin">Input tokens / request</label><input id="tin" type="number" min="0" step="1000" value="8000"></div>
+<div><label for="tout">Output tokens / request</label><input id="tout" type="number" min="0" step="100" value="1500"></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="22">22 weekdays</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+<div><label for="cache">Cache hit rate on input</label><select id="cache"><option value="0" selected>0%</option><option value="0.5">50%</option><option value="0.8">80%</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / request</div><div class="v" id="rReq">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Total / month</div><div class="v" id="rMonth">$—</div></div>
+<div class="card"><div class="k">Cache savings / mo</div><div class="v" id="rSave">$—</div></div>
+</div>
+<h2>MiniMax-M3.1-Flash official pricing (per 1M tokens, USD)</h2>
+<table>
+<tr><th>Component</th><th class="num">Rate</th><th>Notes</th></tr>
+<tr><td>Input</td><td class="num">$0.15</td><td>flat — no peak/off-peak split</td></tr>
+<tr><td>Output</td><td class="num">$0.60</td><td>completion tokens</td></tr>
+<tr><td>Cached input</td><td class="num">$0.015</td><td>10× cheaper than fresh input</td></tr>
+<tr><td>Release</td><td class="num">2026-10-19</td><td>~70% cheaper agent cost than M3</td></tr>
+</table>
+<h2>Typical workloads (per request, no caching)</h2>
+<table>
+<tr><th>Job shape</th><th class="num">Cost / request</th></tr>
+<tr><td>8k in / 1.5k out (agent step)</td><td class="num">$0.0021</td></tr>
+<tr><td>50k in / 4k out (coding task)</td><td class="num">$0.0099</td></tr>
+<tr><td>500k in / 8k out (long context)</td><td class="num">$0.0798</td></tr>
+</table>
+<h3>Cost levers</h3>
+<ul>
+<li><strong>Cache the agent scaffold</strong> — system prompt + tool definitions resend every step; at $0.015/M cached vs $0.15/M fresh, a stable prefix cuts input bills 10×.</li>
+<li><strong>Lean into speed</strong> — 200+ TPS output (P50 170+) means fewer timeouts and retries billing you twice.</li>
+<li><strong>Offload big-context reads</strong> — long documents belong in the cached prefix, not the per-step tail.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>What is MiniMax M3.1 Flash?</h3>
+<p>The Flash tier of MiniMax's M3.1 series (released 2026-10-19), tuned for agentic tasks — automation, coding, computer use, and cybersecurity. It scores 29.6 on Agents' Last Exam (ALE) and ranks first among Chinese models on agentic benchmarks, at roughly 70% lower usage cost than its predecessor.</p>
+<h3>Is pricing peak/off-peak like DeepSeek?</h3>
+<p>No — M3.1 Flash bills one flat rate worldwide: $0.15 input / $0.60 output / $0.015 cached per 1M tokens. Compare with <a href="deepseek-v4.1-flash-api-cost-calculator.html">DeepSeek V4.1 Flash</a>, which halves its CNY rates off-peak.</p>
+<h3>What context window does it support?</h3>
+<p>The M3 family ships 1M-class long context (MSA architecture); check MiniMax's docs for the exact M3.1 Flash limit at your tier.</p>
+<h3>How does it compare on price?</h3>
+<p>$0.15/$0.60 sits in the value tier — same class as GPT-6 Luna and Claude Haiku 5.5 ($0.10/$0.50), well below mid-premium Mistral Large 4 ($0.68/$2.09).</p>
+
+<script>
+(function(){
+"use strict";
+var P={in:0.15,out:0.60,cache:0.015};
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=100)return "$"+n.toFixed(0);if(n>=1)return "$"+n.toFixed(2);if(n>=0.01)return "$"+n.toFixed(3);return "$"+n.toFixed(4)}
+function calc(){
+  var reqs=parseFloat($("reqs").value)||0;
+  var tin=parseFloat($("tin").value)||0;
+  var tout=parseFloat($("tout").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var cr=parseFloat($("cache").value)||0;
+  var inCost=tin/1e6*(P.in*(1-cr)+P.cache*cr);
+  var outCost=tout/1e6*P.out;
+  var per=inCost+outCost;
+  $("rReq").textContent=fmt(per);
+  $("rDay").textContent=fmt(per*reqs);
+  $("rMonth").textContent=fmt(per*reqs*d);
+  $("rSave").textContent=fmt(tin/1e6*cr*reqs*d*(P.in-P.cache));
+}
+["reqs","tin","tout","days","cache"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Pricing verified 2026-10-20 — official MiniMax pricing page &amp; the M3.1 Flash release post “Redefining Agent Performance and Cost” (2026-10-19).</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="deepseek-v4.1-flash-api-cost-calculator.html">DeepSeek V4.1 Flash cost calculator</a> — ¥ peak/off-peak rates · same-day rival release</li>
+<li><a href="gpt-6-luna-api-cost-calculator.html">GPT-6 Luna cost calculator</a> — $0.10/M in · $0.50/M out · value-tier comparison</li>
+<li><a href="claude-haiku-5.5-api-cost-calculator.html">Claude Haiku 5.5 cost calculator</a> — $0.10/M in · $0.50/M out · fast tier</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
