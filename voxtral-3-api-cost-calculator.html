@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voxtral 3 API Cost Calculator — Mistral Speech-to-Text, TTS &amp; Voice Agent Pricing (2026)</title>
+<meta name="description" content="Free Voxtral 3 API cost calculator. Estimate Mistral transcription ($0.0035–$0.0040/min), realtime STT ($0.008/min), TTS ($13/1M chars) and voice-agent ($0.04–$0.08/min) costs per day or month.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/voxtral-3-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Voxtral 3 API Cost Calculator — Mistral Speech Pricing">
+<meta property="og:description" content="Estimate Voxtral 3 transcription, TTS and voice-agent API costs by minutes and characters. Official Mistral launch rates, no signup.">
+<meta property="og:url" content="https://cashi-lab.github.io/aiapicalc/voxtral-3-api-cost-calculator.html">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--mut:#8b949e;--txt:#e6edf3;--acc:#ff7000;--acc2:#3fb950}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding:0 16px}
+.wrap{max-width:860px;margin:0 auto;padding:24px 0 60px}
+header{margin:28px 0 10px}
+h1{font-size:1.9rem;letter-spacing:-.02em}
+h1 span{color:var(--acc)}
+header p{color:var(--mut);margin-top:6px;font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:22px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin:10px 0 4px}
+input[type=number],select{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--txt);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.result{background:linear-gradient(135deg,#1c2128,#161b22);border:1px solid var(--acc);border-radius:10px;padding:18px;margin-top:16px}
+.result .big{font-size:2rem;font-weight:700;color:var(--acc)}
+.result .sub{color:var(--mut);font-size:.9rem}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--bd);font-size:.95rem}
+.row:last-child{border-bottom:none}
+.row b{color:var(--acc2)}
+h2{font-size:1.25rem;margin:34px 0 10px;letter-spacing:-.01em}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0}
+th,td{padding:8px 10px;border:1px solid var(--bd);text-align:left}
+th{background:#1c2128}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.note{background:#1c2128;border-left:3px solid var(--acc);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--mut);margin:12px 0}
+details{border:1px solid var(--bd);border-radius:8px;padding:12px 16px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:8px;color:var(--mut);font-size:.92rem}
+.promo{background:linear-gradient(135deg,#2d1b0e,#1c2128);border:1px solid var(--acc);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:.92rem}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+.topnav{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}
+.brand{font-weight:700;color:var(--txt);text-decoration:none}
+.brand b{color:var(--acc)}
+.topnav a{color:var(--mut);text-decoration:none;margin-left:14px;font-size:.9rem}
+.topnav a:hover{color:var(--txt)}
+ul{margin:8px 0 8px 20px}
+li{margin:4px 0}
+a{color:#58a6ff}
+.copybtn{background:var(--card);border:1px solid var(--bd);color:var(--txt);border-radius:8px;padding:8px 16px;cursor:pointer;font-size:.9rem;margin-top:10px}
+.copybtn:hover{border-color:var(--acc)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Voxtral 3 API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/voxtral-3-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "Voxtral 3 API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/voxtral-3-api-cost-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Voxtral 3 transcription cost?","acceptedAnswer":{"@type":"Answer","text":"Voxtral Mini Transcribe 3 (batch) costs $0.0035/min and Voxtral Small Transcribe 3 costs $0.0040/min. Realtime transcription (Voxtral Mini Transcribe Realtime 3) costs $0.008/min."}},
+{"@type":"Question","name":"How much does Voxtral Speech 3 TTS cost?","acceptedAnswer":{"@type":"Answer","text":"Voxtral Speech 3 text-to-speech costs $13 per 1M characters, the same rate for batch and realtime APIs."}},
+{"@type":"Question","name":"How much does a full Voxtral 3 voice agent cost per minute?","acceptedAnswer":{"@type":"Answer","text":"The voice agent API with Mistral Small 4 for reasoning costs $0.04/min all-in. With any other reasoning model it costs $0.08/min."}}]}</script>
+</head>
+<body>
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a href="index.html">All calculators</a><a href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>Voxtral <span>3</span> API Cost Calculator</h1>
+<p>Mistral's speech-to-text, text-to-speech and voice-agent family, launched October 20, 2026. All rates below are the official launch prices from Mistral's announcement.</p>
+</header>
+
+<div class="card">
+<h2 style="margin-top:0">Calculator</h2>
+<div class="grid">
+<div>
+<label for="stt-mins">Transcription volume (minutes/day)</label>
+<input type="number" id="stt-mins" value="500" min="0" step="50">
+</div>
+<div>
+<label for="stt-model">STT model</label>
+<select id="stt-model">
+<option value="0.0035">Mini Transcribe 3 (batch) — $0.0035/min</option>
+<option value="0.0040">Small Transcribe 3 — $0.0040/min</option>
+<option value="0.0080">Mini Transcribe Realtime 3 — $0.0080/min</option>
+</select>
+</div>
+<div>
+<label for="tts-chars">TTS volume (characters/day)</label>
+<input type="number" id="tts-chars" value="50000" min="0" step="5000">
+</div>
+<div>
+<label for="agent-mins">Voice-agent minutes/day (listen+reason+speak, all-in)</label>
+<input type="number" id="agent-mins" value="0" min="0" step="100">
+</div>
+<div>
+<label for="agent-model">Voice-agent reasoning model</label>
+<select id="agent-model">
+<option value="0.04">Mistral Small 4 — $0.04/min</option>
+<option value="0.08">Any other reasoning model — $0.08/min</option>
+</select>
+</div>
+<div>
+<label for="days">Days per month</label>
+<input type="number" id="days" value="30" min="1" max="31">
+</div>
+</div>
+
+<div class="result">
+<div class="big" id="total">$—</div>
+<div class="sub">estimated monthly cost</div>
+<div style="margin-top:12px">
+<div class="row"><span>Transcription</span><b id="stt-cost">$—</b></div>
+<div class="row"><span>Text-to-speech ($13/1M chars)</span><b id="tts-cost">$—</b></div>
+<div class="row"><span>Voice agent (all-in per minute)</span><b id="agent-cost">$—</b></div>
+<div class="row"><span>Per day, all combined</span><b id="day-cost">$—</b></div>
+</div>
+</div>
+<button class="copybtn" id="copy">Copy summary</button>
+</div>
+
+<div class="promo">
+🎙️ <b>Voxtral 3 official launch pricing</b> (announced Oct 20, 2026): transcription from <b>$0.0035/min</b>, realtime STT <b>$0.008/min</b>, TTS <b>$13/1M characters</b>, and the all-in voice-agent API at <b>$0.04/min</b> with Mistral Small 4 for reasoning ($0.08/min with any other model). EU-hosted API or self-deployment.
+</div>
+
+<h2>Voxtral 3 family pricing table</h2>
+<table>
+<tr><th>Model / API</th><th class="num">Price</th><th>Notes</th></tr>
+<tr><td>Voxtral Mini Transcribe 3 (batch)</td><td class="num">$0.0035/min</td><td>50+ languages, diarization, context biasing</td></tr>
+<tr><td>Voxtral Small Transcribe 3</td><td class="num">$0.0040/min</td><td>State-of-the-art multilingual + diarization</td></tr>
+<tr><td>Voxtral Mini Transcribe Realtime 3</td><td class="num">$0.0080/min</td><td>Sub-500ms latency, 35+ languages, end-of-turn detection</td></tr>
+<tr><td>Voxtral Speech 3 (TTS, batch &amp; realtime)</td><td class="num">$13 / 1M chars</td><td>35+ languages, 50+ dialects, emotion adaptation</td></tr>
+<tr><td>Voice agent API — Mistral Small 4 reasoning</td><td class="num">$0.04/min</td><td>Listen + reason + speak pipeline, all-in</td></tr>
+<tr><td>Voice agent API — any other reasoning model</td><td class="num">$0.08/min</td><td>Swap the LLM without rewriting the agent</td></tr>
+</table>
+
+<h2>Typical workloads</h2>
+<ul>
+<li><b>Contact-center bot</b> (1,000 agent-min/day, Mistral Small 4): 1,000 × $0.04 × 30 = <b>$1,200/mo</b> all-in.</li>
+<li><b>Meeting transcriber</b> (2,000 min/day batch Mini): 2,000 × $0.0035 × 30 = <b>$210/mo</b>.</li>
+<li><b>Realtime agent pipeline à la carte</b>: realtime STT $0.008/min + TTS at ~1,500 chars/min ≈ $0.0195/min → ~$0.028/min before LLM tokens — the $0.04/min bundle is cheaper unless you already run your own LLM.</li>
+<li><b>Audiobook / narration</b> (300k chars): 300,000 × $13/1M = <b>$3.90</b> one-off.</li>
+</ul>
+
+<h2>Cost-cutting levers</h2>
+<ul>
+<li><b>Batch instead of realtime</b> when latency allows: Mini batch $0.0035 vs realtime $0.008 — 56% cheaper per minute.</li>
+<li><b>Use the bundled agent API</b> ($0.04/min) instead of stitching STT + LLM + TTS yourself if Mistral Small 4 is good enough for reasoning.</li>
+<li><b>Strip fillers before TTS</b> — TTS is billed per character, so removing disfluencies/hesitations from agent replies cuts the $13/1M bill directly.</li>
+<li><b>Self-deploy for sovereignty</b> — Voxtral 3 ships for on-prem; at high volume the API convenience premium is worth recalculating.</li>
+</ul>
+
+<h2>FAQ</h2>
+<details><summary>Is Voxtral 3 cheaper than Whisper or ElevenLabs?</summary><p>Mistral positions Voxtral Speech 3 ($13/1M chars) below OpenAI TTS-1, Deepgram, ElevenLabs Flash and Gemini Flash for comparable TTS workloads, and the Small Transcribe model beats Whisper, Scribe v2 and Gemini 3.5 Transcribe on multilingual benchmarks at $0.0040/min. Run your own numbers above.</p></details>
+<details><summary>Does the $0.04/min agent price include transcription and speech?</summary><p>Yes — the voice-agent API price is all-in for the streaming pipeline (listen, reason with Mistral Small 4, speak). Only if you swap in a different reasoning model does it become $0.08/min.</p></details>
+<details><summary>Is there a free tier?</summary><p>Mistral typically offers trial credit on new console accounts; the rates here are the official list prices with no subscription. Check the Mistral console for current promotions.</p></details>
+<details><summary>Where do these prices come from?</summary><p>Mistral's official Voxtral 3 announcement (mistral.ai/news/voxtral-3), fetched October 21, 2026. Prices are USD list rates on Mistral's EU-hosted API.</p></details>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li><a href="https://mistral.ai/news/voxtral-3" rel="nofollow">Mistral Voxtral 3 announcement</a> — full price table (fetched 2026-10-21)</li>
+<li><a href="https://docs.mistral.ai/studio/audio/overview" rel="nofollow">Mistral audio docs</a> — STT/TTS/voice-agent reference</li>
+<li>More speech-model calculators on our <a href="index.html">hub</a></li>
+</ul>
+
+<section class="promo" style="margin-top:36px">
+<p style="margin:0 0 8px"><b>We publish daily AI-driven market signals every trading day on the WeChat Official Account.</b></p>
+<p style="margin:0"><span style="color:#e6edf3">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。</span><br><span style="color:#8b949e;font-size:.8rem">Data for research only — not investment advice.</span></p>
+</section>
+
+<h2>Related calculators</h2>
+<ul>
+<li><a href="grok-voice-3-api-cost-calculator.html">Grok Voice 3 cost calculator</a> — xAI realtime audio at $0.08/min</li>
+<li><a href="seedance-3.0-api-cost-calculator.html">Seedance 3.0 video cost calculator</a> — ByteDance video generation</li>
+<li><a href="minimax-m3.1-flash-api-cost-calculator.html">MiniMax M3.1 Flash cost calculator</a> — $0.15/$0.60 per M tokens</li>
+</ul>
+
+<footer>
+<p>Voxtral 3 API Cost Calculator · rates verified against Mistral's official announcement on 2026-10-21 · <a href="about.html">about</a> · <a href="privacy.html">privacy</a></p>
+<p><a href="index.html">All AI API calculators</a> · <a href="mistral-large-4-api-cost-calculator.html">Mistral Large 4 calculator</a></p>
+</footer>
+</div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function fmt(n){ if(!isFinite(n))return "$—"; if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0}); if(n>=100)return "$"+n.toFixed(0); if(n>=1)return "$"+n.toFixed(2); return "$"+n.toFixed(3)}
+function num(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
+function calc(){
+var stt=num("stt-mins")*parseFloat($("stt-model").value);
+var tts=num("tts-chars")*13/1e6;
+var ag=num("agent-mins")*parseFloat($("agent-model").value);
+var day=stt+tts+ag;
+var days=num("days")||1;
+$("stt-cost").textContent=fmt(stt*days);
+$("tts-cost").textContent=fmt(tts*days);
+$("agent-cost").textContent=fmt(ag*days);
+$("day-cost").textContent=fmt(day);
+$("total").textContent=fmt(day*days);
+}
+["stt-mins","tts-chars","agent-mins","days"].forEach(function(id){$(id).addEventListener("input",calc)});
+["stt-model","agent-model"].forEach(function(id){$(id).addEventListener("change",calc)});
+calc();
+var btn=$("copy");
+btn.addEventListener("click",function(){
+var t=$("total").textContent;
+var txt="Voxtral 3 API cost ≈ "+t+"/month (STT+TTS+agent) · https://cashi-lab.github.io/aiapicalc/voxtral-3-api-cost-calculator.html";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}else{done(false)}
+});
+})();
+</script>
+</body>
+</html>
