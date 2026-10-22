@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character AI Chat Exporter — Export C.AI Chats Free (2026)</title>
+<meta name="description" content="Free Character AI chat exporter. Download your full C.AI chat history as JSON, TXT, Markdown or CSV in ~2 minutes — no install, no extension, runs in your browser console while you wait for the slow official export.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/character-ai-chat-exporter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Character AI Chat Exporter — Free, No Install">
+<meta property="og:description" content="Export your full Character.AI chat history to JSON/TXT/MD/CSV from the browser console. Token never leaves your browser.">
+<meta property="og:url" content="https://cashi-lab.github.io/aiapicalc/character-ai-chat-exporter.html">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📤</text></svg>">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--mut:#8b949e;--txt:#e6edf3;--acc:#ff7000;--acc2:#3fb950}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding:0 16px}
+.wrap{max-width:860px;margin:0 auto;padding:24px 0 60px}
+header{margin:28px 0 10px}
+h1{font-size:1.9rem;letter-spacing:-.02em}
+h1 span{color:var(--acc)}
+header p{color:var(--mut);margin-top:6px;font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:22px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin:10px 0 4px}
+input[type=number],input[type=text],select{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--txt);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc)}
+input[type=checkbox]{accent-color:var(--acc);margin-right:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+h2{font-size:1.25rem;margin:34px 0 10px;letter-spacing:-.01em}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0}
+th,td{padding:8px 10px;border:1px solid var(--bd);text-align:left}
+th{background:#1c2128}
+.note{background:#1c2128;border-left:3px solid var(--acc);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--mut);margin:12px 0}
+.steps{counter-reset:s;list-style:none;margin:12px 0}
+.steps li{counter-increment:s;position:relative;padding:8px 0 8px 44px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#0d1117;font-weight:700;display:flex;align-items:center;justify-content:center}
+pre{background:#0a0d12;border:1px solid var(--bd);border-radius:8px;padding:14px;overflow:auto;font-size:.78rem;line-height:1.5;max-height:340px;color:#c9d1d9;margin-top:12px;white-space:pre}
+.copybtn{background:var(--card);border:1px solid var(--acc);color:var(--acc);border-radius:8px;padding:10px 18px;cursor:pointer;font-size:.95rem;font-weight:600;margin-top:10px}
+.copybtn:hover{background:var(--acc);color:#0d1117}
+.fmt{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.fmt label{display:flex;align-items:center;color:var(--txt);font-size:.95rem;margin:0;cursor:pointer}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+.topnav{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}
+.brand{font-weight:700;color:var(--txt);text-decoration:none}
+.brand b{color:var(--acc)}
+.topnav a{color:var(--mut);text-decoration:none;margin-left:14px;font-size:.9rem}
+.topnav a:hover{color:var(--txt)}
+ul{margin:8px 0 8px 20px}
+li{margin:4px 0}
+a{color:#58a6ff}
+details{border:1px solid var(--bd);border-radius:8px;padding:12px 16px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:8px;color:var(--mut);font-size:.92rem}
+.promo{background:linear-gradient(135deg,#2d1b0e,#1c2128);border:1px solid var(--acc);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:.92rem}
+code{background:#1c2128;border-radius:4px;padding:1px 6px;font-size:.88em}
+.ok{color:var(--acc2);font-weight:600}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Character AI Chat Exporter","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://cashi-lab.github.io/aiapicalc/character-ai-chat-exporter.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AI API Calc","item":"https://cashi-lab.github.io/aiapicalc/"},{"@type":"ListItem","position":2,"name":"Character AI Chat Exporter","item":"https://cashi-lab.github.io/aiapicalc/character-ai-chat-exporter.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I export my Character.AI chat history for free?","acceptedAnswer":{"@type":"Answer","text":"Use the console script generator on this page: pick your formats, copy the generated script, paste it into the DevTools console on any character.ai tab, and follow the prompts. It pulls every message of a chat through the same API the site itself uses and downloads the files locally. No install and no payment."}},{"@type":"Question","name":"How long does the official Character.AI data export take?","acceptedAnswer":{"@type":"Answer","text":"Character.AI's official data-export request has a reported processing time of about 3-4 weeks, and there is no guarantee it is faster while the company restructures after its October 2026 Chapter 11 filing. The console exporter above finishes in about two minutes per chat."}},{"@type":"Question","name":"Is Character.AI shutting down after the bankruptcy filing?","acceptedAnswer":{"@type":"Answer","text":"As of October 2026 Character.AI has filed for Chapter 11 protection with reported interest from buyers including Disney. Chapter 11 is a reorganization, not an immediate shutdown, and chats currently remain accessible. Regardless of the outcome, exporting the chats you care about now is the safe move."}},{"@type":"Question","name":"Does this exporter see or store my token?","acceptedAnswer":{"@type":"Answer","text":"No. This page is static and has no backend. The generated script runs inside your own browser tab on character.ai, reads the token locally, and sends it only to character.ai's own API endpoint. Nothing is transmitted to this site or any third party."}},{"@type":"Question","name":"What formats can I export Character.AI chats to?","acceptedAnswer":{"@type":"Answer","text":"JSON (raw, lossless), TXT (clean readable transcript), Markdown, and CSV (one row per message, spreadsheet-friendly). You can generate all four at once from the options above."}},{"@type":"Question","name":"The console says I cannot paste. What do I do?","acceptedAnswer":{"@type":"Answer","text":"Chrome shows a 'self-XSS' paste protection the first time. Type the phrase allow pasting (some versions: allow-pasting) in the console and press Enter once, then paste the script again. Firefox and Safari do not have this guard."}}]}</script>
+</head>
+<body>
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>Character AI <span>Chat Exporter</span></h1>
+<p>Download your full Character.AI chat history — every message, every page — as JSON, TXT, Markdown or CSV. Free, no install, no browser extension. Runs in your own browser console while the official export takes weeks.</p>
+</header>
+
+<div class="card">
+<h2 style="margin-top:0">1 · Build your export script</h2>
+<div class="fmt">
+<label><input type="checkbox" id="f-json" checked> JSON</label>
+<label><input type="checkbox" id="f-txt" checked> TXT</label>
+<label><input type="checkbox" id="f-md"> Markdown</label>
+<label><input type="checkbox" id="f-csv"> CSV</label>
+</div>
+<div class="grid">
+<div>
+<label>Messages</label>
+<label style="display:flex"><input type="checkbox" id="o-ts" checked> include timestamps (TXT/MD/CSV)</label>
+<label style="display:flex"><input type="checkbox" id="o-strip" checked> strip *asterisk actions* (TXT/MD)</label>
+</div>
+<div>
+<label for="o-name">Your display name in transcripts</label>
+<input type="text" id="o-name" value="You" maxlength="40">
+</div>
+</div>
+<button class="copybtn" id="copyBtn">Copy script for console ⧉</button>
+<div class="note">The box below is a preview — the <b>Copy</b> button already grabs the latest version. Re-copy after changing options.</div>
+<pre id="out">(click Copy — script preview appears here)</pre>
+</div>
+
+<div class="card">
+<h2 style="margin-top:0">2 · Run it on character.ai (≈2 min)</h2>
+<ol class="steps">
+<li>Open <a href="https://character.ai" rel="nofollow">character.ai</a> in Chrome or Edge on desktop and log in. Any tab works — you don't need to open the target chat.</li>
+<li>Press <code>F12</code> → <b>Console</b> tab. First time only: if Chrome blocks pasting, type <code>allow pasting</code> and press Enter.</li>
+<li>Paste the copied script, press Enter. If asked for a token, it's in <code>F12 → Application → Cookies → character.ai → web_token</code>. Leave the chat-ID prompt <b>blank</b> to list your recent chats and pick one.</li>
+</ol>
+<div class="note">💡 The script auto-paginates the entire chat (newest → oldest), shows progress per page, then downloads the files. Long chats take a bit longer — a 1,000-message chat is usually under a minute.</div>
+</div>
+
+<h2>Why this way beats the alternatives</h2>
+<table>
+<tr><th>Method</th><th>Time</th><th>Full history</th><th>Install</th><th>Catch</th></tr>
+<tr><td><b class="ok">This console script</b></td><td>~2 min</td><td>✅ every message</td><td>none</td><td>run it yourself (that's the point)</td></tr>
+<tr><td>Official export request</td><td>3–4 weeks reported</td><td>✅ account dump</td><td>none</td><td>slow; timeline may slip during restructuring</td></tr>
+<tr><td>CAI Tools extension</td><td>minutes</td><td>⚠️ page-dependent</td><td>Chrome extension</td><td>extension reads every page; breaks on UI changes</td></tr>
+<tr><td>Python scripts (GitHub)</td><td>~15 min setup</td><td>✅</td><td>Python + deps</td><td>copy token into a terminal; not everyone's comfort zone</td></tr>
+</table>
+
+<div class="note">🔒 <b>Privacy:</b> this page is static — no backend, no analytics on the script, nothing uploaded. The script runs on <i>your</i> character.ai tab, finds your token <i>locally</i>, and talks only to character.ai's own API. Export only your own chats and keep in mind this uses the site's internal API, which can change without notice.</div>
+
+<h2>Bankruptcy panic, meet a 2-minute backup</h2>
+<p>Character.AI filed for Chapter 11 on October 12, 2026, with Disney among the reported bidders for its assets. Nobody knows what a sale means for chat history — the official export route currently quotes 3–4 weeks of processing. If your chats matter to you, don't wait for the court docket: pull them tonight, in all four formats, and keep the JSON as your lossless master copy.</p>
+
+<h2>FAQ</h2>
+<details><summary>Does it work on phone?</summary><p>Chrome on Android can do it via "Request desktop site" + a console app, but it's fiddly. Use a desktop browser — two minutes there beats thirty on mobile.</p></details>
+<details><summary>Token not found automatically?</summary><p>Open F12 → Application → Cookies → <code>https://character.ai</code> and copy the <code>web_token</code> value. Paste it into the prompt. If requests still return 401/403, log out and back in — tokens rotate.</p></details>
+<details><summary>Where do I find the chat ID manually?</summary><p>Open the chat, F12 → Network tab, click any message scroll — look for a request to <code>neo.character.ai/turns/&lt;uuid&gt;/</code>. That UUID is the chat ID. Or just leave the prompt blank: the script lists your recent chats with their IDs.</p></details>
+<details><summary>Which file should I keep?</summary><p>JSON is the master copy (every field, lossless). TXT/MD are for reading, CSV is for spreadsheets. Disk is cheap — take all four.</p></details>
+<details><summary>Is this allowed?</summary><p>You're exporting your own data with your own credentials through the same API the web client uses. It's the same thing the official export does, faster. Still, unofficial is unofficial — internal APIs can change any day.</p></details>
+
+<h2>Related tools</h2>
+<ul>
+<li><a href="index.html">All AI API calculators</a> — cost calculators for every major model release</li>
+<li><a href="gpt-6-luna-api-cost-calculator.html">GPT-6 Luna API cost calculator</a> — $0.10/M in · $0.50/M out</li>
+<li><a href="nano-banana-2.1-api-cost-calculator.html">Nano Banana 2.1 image cost calculator</a> — from $0.034/image</li>
+</ul>
+
+<section class="promo" style="margin-top:36px">
+<p style="margin:0 0 8px"><b>We publish daily AI-driven market signals every trading day on the WeChat Official Account.</b></p>
+<p style="margin:0"><span style="color:#e6edf3">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。</span><br><span style="color:#8b949e;font-size:.8rem">Data for research only — not investment advice.</span></p>
+</section>
+
+<footer>
+<p>Character AI Chat Exporter · method verified against the neo.character.ai API used by the web client on 2026-10-22 · <a href="about.html">about</a> · <a href="privacy.html">privacy</a></p>
+<p><a href="index.html">All AI API calculators</a> · <a href="index.html">Export &amp; data tools</a></p>
+</footer>
+</div>
+
+<script type="text/plain" id="caiScript">(async () => {
+  const CFG = __CFG__;
+  const BASE = 'https://neo.character.ai';
+  const MAX_PAGES = 200, DELAY = 300;
+
+  // 1) find token locally (cookie first, then localStorage keys that look like tokens)
+  const findToken = () => {
+    const m = document.cookie.match(/(?:^|;\s*)web_token=([^;]+)/);
+    if (m) return decodeURIComponent(m[1]);
+    for (const k of Object.keys(localStorage)) {
+      if (!/token/i.test(k)) continue;
+      const v = (localStorage.getItem(k) || '').replace(/^"|"$/g, '');
+      if (/^[A-Za-z0-9_-]{20,}$/.test(v)) return v;
+    }
+    return '';
+  };
+
+  let token = findToken();
+  if (!token) {
+    token = (prompt('web_token not found automatically.\nOpen F12 → Application → Cookies → character.ai → copy web_token value and paste it here:') || '').trim();
+  }
+  if (!token) return console.error('❌ No token — aborted. Nothing was sent anywhere.');
+  const H = { 'Authorization': 'Token ' + token, 'Accept': 'application/json' };
+
+  // 2) pick chat (blank = list recent chats)
+  let cid = (prompt('Chat ID (UUID). Leave BLANK to list your recent chats:') || '').trim();
+  if (!cid) {
+    console.log('Fetching recent chats...');
+    let chats = [];
+    try {
+      const r = await fetch(BASE + '/chats/recent/?num=100', { headers: H, credentials: 'include' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const j = await r.json();
+      chats = j.chats || [];
+    } catch (e) {
+      console.error('Could not list chats (' + e.message + '). Find the chat ID manually: open the chat, F12 → Network → any neo.character.ai/turns/<uuid>/ request → copy the uuid.');
+      return;
+    }
+    const rows = chats.map(c => ({ chat_id: c.chat_id, character: c.character_name || '?', preview: ((c.last_message && c.last_message.text) || '').slice(0, 50) }));
+    console.table(rows);
+    cid = (prompt('chat_id from the table above (copy the whole UUID):') || '').trim();
+    if (!cid) return console.error('❌ No chat ID — aborted.');
+  }
+
+  // 3) paginate all turns
+  const turns = [];
+  let nt = null, page = 0;
+  try {
+    do {
+      page++;
+      let url = BASE + '/turns/' + cid + '/';
+      if (nt) url += '?next_token=' + encodeURIComponent(nt);
+      const r = await fetch(url, { headers: H, credentials: 'include' });
+      if (!r.ok) {
+        console.error('HTTP ' + r.status + (r.status === 401 || r.status === 403 ? ' — token expired? log out/in on character.ai and re-run.' : ' — check chat ID.'));
+        return;
+      }
+      const j = await r.json();
+      const got = (j.turns || []).length;
+      turns.push(...(j.turns || []));
+      nt = (j.meta && j.meta.next_token) || null;
+      console.log('page ' + page + ': +' + got + ' (total ' + turns.length + ')');
+      if (nt) await new Promise(s => setTimeout(s, DELAY));
+    } while (nt && page < MAX_PAGES);
+  } catch (e) { return console.error('Network error: ' + e.message); }
+  if (!turns.length) return console.warn('⚠️ 0 messages — wrong chat ID?');
+  turns.reverse(); // oldest first
+  console.log('Fetched ' + turns.length + ' messages. Building files...');
+
+  // readable rows used by TXT/MD/CSV
+  const rows = [];
+  for (const t of turns) {
+    const pr = (t.candidates || []).find(c => c.candidate_id === t.primary_candidate_id);
+    if (!pr) continue;
+    let text = pr.raw_content || '';
+    if (CFG.stripMd) text = text.split('*').join('');
+    text = text.trim();
+    if (!text) continue;
+    const isHuman = t.author && t.author.is_human;
+    const name = isHuman ? CFG.userName : ((t.author && t.author.name) || 'Character').trim() || 'Character';
+    const ts = (t.create_time || '').replace('T', ' ').replace('Z', '');
+    rows.push({ name, isHuman, ts, text });
+  }
+
+  const stamp = new Date().toISOString().slice(0, 10);
+  const baseName = 'cai-chat-' + cid.slice(0, 8) + '-' + stamp;
+  const download = (name, content, type) => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], { type }));
+    a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+
+  if (CFG.formats.includes('json')) {
+    download(baseName + '.json', JSON.stringify({ chat_id: cid, exported_at: new Date().toISOString(), message_count: rows.length, messages: turns }, null, 2), 'application/json');
+  }
+  if (CFG.formats.includes('txt')) {
+    const L = ['# Character.AI export · ' + new Date().toUTCString(), '# ' + rows.length + ' messages', ''];
+    for (const r of rows) L.push((CFG.timestamps && r.ts ? '[' + r.ts + '] ' : '') + r.name + ': ' + r.text, '', '---', '');
+    download(baseName + '.txt', L.join('\n'), 'text/plain');
+  }
+  if (CFG.formats.includes('md')) {
+    const L = ['# Character.AI export', '_' + rows.length + ' messages · ' + new Date().toUTCString() + '_', ''];
+    for (const r of rows) L.push('**' + r.name + '**' + (CFG.timestamps && r.ts ? ' · `' + r.ts + '`' : '') + '\n\n' + r.text + '\n\n---\n');
+    download(baseName + '.md', L.join('\n'), 'text/markdown');
+  }
+  if (CFG.formats.includes('csv')) {
+    const esc = s => '"' + String(s).split('"').join('""') + '"';
+    const head = esc('seq') + ',' + esc('role') + ',' + esc('name') + ',' + esc('timestamp') + ',' + esc('text');
+    const body = rows.map((r, i) => [i + 1, r.isHuman ? 'user' : 'character', r.name, CFG.timestamps ? r.ts : '', r.text].map(esc).join(',')).join('\n');
+    download(baseName + '.csv', head + '\n' + body + '\n', 'text/csv');
+  }
+  console.log('✅ Done: ' + rows.length + ' messages → ' + CFG.formats.join(', ').toUpperCase() + ' · check your Downloads folder.');
+})();</script>
+
+<script>
+(function () {
+  var ids = ['f-json', 'f-txt', 'f-md', 'f-csv', 'o-ts', 'o-strip', 'o-name'];
+  var out = document.getElementById('out');
+  var copyBtn = document.getElementById('copyBtn');
+  var tmpl = document.getElementById('caiScript').textContent;
+
+  function build() {
+    var formats = [];
+    if (document.getElementById('f-json').checked) formats.push('json');
+    if (document.getElementById('f-txt').checked) formats.push('txt');
+    if (document.getElementById('f-md').checked) formats.push('md');
+    if (document.getElementById('f-csv').checked) formats.push('csv');
+    if (!formats.length) formats = ['json'];
+    var name = (document.getElementById('o-name').value || 'You').replace(/["\\]/g, '').slice(0, 40) || 'You';
+    var cfg = { formats: formats, timestamps: document.getElementById('o-ts').checked, stripMd: document.getElementById('o-strip').checked, userName: name };
+    return tmpl.replace('__CFG__', JSON.stringify(cfg));
+  }
+  function refresh() { out.textContent = build(); }
+  ids.forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(el.type === 'text' ? 'input' : 'change', refresh);
+  });
+  copyBtn.addEventListener('click', function () {
+    var s = build();
+    out.textContent = s;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(s).then(function () {
+        copyBtn.textContent = 'Copied ✓ — now F12 on character.ai';
+        setTimeout(function () { copyBtn.textContent = 'Copy script for console ⧉'; }, 2500);
+      }, function () { fallbackCopy(s); });
+    } else { fallbackCopy(s); }
+  });
+  function fallbackCopy(s) {
+    var ta = document.createElement('textarea');
+    ta.value = s; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); copyBtn.textContent = 'Copied ✓ — now F12 on character.ai'; setTimeout(function () { copyBtn.textContent = 'Copy script for console ⧉'; }, 2500); }
+    catch (e) { alert('Copy failed — select the preview box manually and copy.'); }
+    document.body.removeChild(ta);
+  }
+  refresh();
+})();
+</script>
+</body>
+</html>
