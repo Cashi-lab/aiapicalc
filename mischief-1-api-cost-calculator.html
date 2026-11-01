@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mischief 1 API Cost Calculator — TBC Video Pricing $0.005/s (2026)</title>
+<meta name="description" content="Mischief 1 API cost calculator. Official TBC image-to-video rates: $0.005/s at 480p, $0.01/s at 720p — the cheapest video model on OpenRouter, same price on fal. Per-video, per-day and monthly budgets.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/mischief-1-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mischief 1 API Cost Calculator — TBC Video Pricing $0.005/s (2026)">
+<meta property="og:description" content="Mischief 1 API cost calculator. Official rates: $0.005/s at 480p, $0.01/s at 720p — cheapest video model on OpenRouter, same price on fal.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Mischief 1 API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/mischief-1-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "Mischief 1 API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/mischief-1-api-cost-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does the Mischief 1 API cost?", "acceptedAnswer": {"@type": "Answer", "text": "Mischief 1 (tbc/mischief-1) bills per second of generated video: $0.005/s at 480p and $0.01/s at 720p, identical on OpenRouter and fal. A 5-second clip costs $0.025 at 480p or $0.05 at 720p; a 3-second clip costs $0.015 or $0.03."}}, {"@type": "Question", "name": "Is Mischief 1 the cheapest video API?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, on OpenRouter it is the cheapest video model listed as of Nov 1, 2026. At 480p the next cheapest are HeyGen Video 1 and Grok Imagine Video 1.5 Lite at $0.02/s (4x more). At 720p, Veo 3.1 Lite without audio is $0.03/s (3x more) and Wan 3.0 is $0.10/s (10x more)."}}, {"@type": "Question", "name": "Does Mischief 1 really run on brain cells?", "acceptedAnswer": {"@type": "Answer", "text": "No. TBC (The Biological Computing Co.) grows real neuron networks in its lab for research, but the shipped product is ordinary software running on standard AI hardware — a layer added after training around a diffusion transformer, adding under 0.1% to the base model's parameter count. The neurons stay in the lab."}}, {"@type": "Question", "name": "What resolutions and durations does Mischief 1 support?", "acceptedAnswer": {"@type": "Answer", "text": "Image-to-video only: one input image becomes the first frame. Clips are 3 or 5 seconds, in 480p or 720p, 16:9 aspect ratio, without sound. Failed generations are not billed."}}, {"@type": "Question", "name": "Is the price different on OpenRouter vs fal?", "acceptedAnswer": {"@type": "Answer", "text": "No. Both channels list the same per-second rates ($0.005/s 480p, $0.01/s 720p). Route through whichever account you already fund; only their top-up minimums and invoicing differ."}}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>Mischief <span>1</span> API Cost Calculator</h1>
+<p class="sub"><strong>Mischief 1</strong> (tbc/mischief-1) image-to-video budget planner — official per-second rates, verified 2026-11-01.</p>
+</header>
+
+<div class="note">✅ Official rates, verified 2026-11-01 from fal's model listing and the OpenRouter model page: <strong>$0.005/second at 480p · $0.01/second at 720p</strong>. Same price on both channels. Failed generations are not billed.</div>
+<div class="grid">
+<div><label for="res">Resolution</label><select id="res"><option value="0.005" selected>480p — $0.005/s</option><option value="0.01">720p — $0.01/s</option></select></div>
+<div><label for="secs">Clip length</label><select id="secs"><option value="3">3 seconds</option><option value="5" selected>5 seconds</option></select></div>
+<div><label for="vids">Videos / day</label><input id="vids" type="number" min="0" step="5" value="50"></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / video</div><div class="v" id="rVid">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Estimated total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+
+<h2>What is Mischief 1</h2>
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>Model</td><td>Mischief 1, slug <code>tbc/mischief-1/image-to-video</code> — image-to-video from The Biological Computing Co. (TBC), San Francisco</td></tr>
+<tr><td>Released</td><td>Oct 28, 2026 on fal · Oct 30, 2026 on OpenRouter</td></tr>
+<tr><td>Output</td><td>3s or 5s clips · 480p or 720p · 16:9 · no audio · single input image as first frame</td></tr>
+<tr><td>Billing</td><td>Per generated second (see rates above) · failed generations not billed</td></tr>
+<tr><td>Channels</td><td>OpenRouter and fal.ai at identical rates</td></tr>
+<tr><td>Under the hood</td><td>Built on Wan 2.2 (Apache 2.0); TBC claims matching quality at ~5× generation speed — no independent benchmarks yet</td></tr>
+<tr><td>The “neuron” story</td><td>Real neurons are grown in TBC's lab for research; the shipped model is standard software — a post-training layer adding &lt;0.1% parameters. Customers never touch biological hardware</td></tr>
+</table>
+
+<h2>Cheapest video model on OpenRouter</h2>
+<p>Per-second rates from each provider's OpenRouter listing (as reported Oct 31, 2026); 5-second clip cost for easy comparison:</p>
+<table>
+<tr><th>Video model</th><th class="num">Per second</th><th class="num">Per 5s clip</th><th class="num">vs Mischief 1</th></tr>
+<tr><td><strong>Mischief 1 — 480p</strong></td><td class="num">$0.005</td><td class="num">$0.025</td><td class="num">—</td></tr>
+<tr><td><strong>Mischief 1 — 720p</strong></td><td class="num">$0.01</td><td class="num">$0.05</td><td class="num">—</td></tr>
+<tr><td>HeyGen Video 1</td><td class="num">$0.02</td><td class="num">$0.10</td><td class="num">4× Mischief 480p</td></tr>
+<tr><td>Grok Imagine Video 1.5 Lite</td><td class="num">$0.02</td><td class="num">$0.10</td><td class="num">4× Mischief 480p</td></tr>
+<tr><td>Veo 3.1 Lite (no audio, 720p)</td><td class="num">$0.03</td><td class="num">$0.15</td><td class="num">3× Mischief 720p</td></tr>
+<tr><td>Wan 3.0 (720p)</td><td class="num">$0.10</td><td class="num">$0.50</td><td class="num">10× Mischief 720p</td></tr>
+</table>
+<p>Several Seedance models are priced per token, so their per-second cost isn't directly comparable.</p>
+
+<h2>Cut your Mischief 1 bill</h2>
+<ul>
+<li><strong>Prototype at 480p</strong> — half the 720p rate on the same 16:9 canvas; upgrade only finals.</li>
+<li><strong>Iterate in 3-second clips</strong> — $0.015 per 480p try; render the 5-second version once the prompt is right.</li>
+<li><strong>Failed generations aren't billed</strong> — don't pad your budget for retries; check invoices match.</li>
+<li><strong>No audio in the output</strong> — if you need sound, that's a separate speech/music API line in your budget, not Mischief's.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How much does the Mischief 1 API cost?</h3>
+<p>$0.005 per second at 480p and $0.01 per second at 720p — a 5-second clip is $0.025 or $0.05. Identical on OpenRouter and fal.</p>
+<h3>Is Mischief 1 the cheapest video API?</h3>
+<p>On OpenRouter, yes (as of Nov 1, 2026). The next cheapest at 480p — HeyGen Video 1 and Grok Imagine Video 1.5 Lite — cost $0.02/s, four times more.</p>
+<h3>Does Mischief 1 really run on brain cells?</h3>
+<p>No. TBC grows real neuron networks in its own lab as a research tool; what ships is ordinary software on standard AI hardware — a post-training layer around a diffusion transformer adding under 0.1% of parameters.</p>
+<h3>What resolutions and durations does it support?</h3>
+<p>Image-to-video only: one image as the first frame, 3s or 5s clips, 480p or 720p, 16:9, no sound.</p>
+
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=1)return "$"+n.toFixed(2);return "$"+n.toFixed(3)}
+function calc(){
+  var perSec=parseFloat($("res").value)||0;
+  var secs=parseInt($("secs").value,10)||5;
+  var vids=parseFloat($("vids").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var perVid=perSec*secs;
+  $("rVid").textContent=fmt(perVid);
+  $("rDay").textContent=fmt(vids*perVid);
+  $("rMonth").textContent=fmt(vids*perVid*d);
+}
+["res","secs","vids","days"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Rates verified 2026-11-01 — fal.ai model listing (<code>tbc/mischief-1/image-to-video</code>) and OpenRouter model page; both state $0.005/s 480p · $0.01/s 720p.</li>
+<li>Competitor rates: OpenRouter listings as reported by thehype.news, Oct 31, 2026.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="flux-3-max-api-cost-calculator.html">FLUX 3 Max API cost calculator</a> — fal promo $0.0425/s (list $0.17/s, ends Nov 7) · audio included</li>
+<li><a href="seedance-3.0-api-cost-calculator.html">Seedance 3.0 API cost calculator</a> — 2.5 baseline $0.103–$0.569/s · launch-day tracker</li>
+<li><a href="kling-4.0-api-cost-calculator.html">Kling 4.0 API cost calculator</a> — pricing pending, budget estimator live</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
