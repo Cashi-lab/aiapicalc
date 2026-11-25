@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek Web Search API Cost Calculator — $0.75/1K Searches, OCR, TTS, ASR (2026)</title>
+<meta name="description" content="DeepSeek tool API cost calculator. Official rates: Search & Fetch $0.75 per 1,000 requests, OCR $0.225 per 1,000 pages, TTS $0.45/10K chars (promo $0.225), ASR $0.116/hour (promo $0.058). Mixed-usage budget planner.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/deepseek-web-search-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DeepSeek Web Search API Cost Calculator — $0.75/1K Searches, OCR, TTS, ASR (2026)">
+<meta property="og:description" content="DeepSeek tool API cost calculator. Search & Fetch $0.75/1K requests, OCR $0.225/1K pages, TTS & ASR promo pricing. Mixed-usage budget planner.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "DeepSeek Web Search API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/deepseek-web-search-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "DeepSeek Web Search API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/deepseek-web-search-api-cost-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does the DeepSeek Web Search API cost?", "acceptedAnswer": {"@type": "Answer", "text": "$0.75 per 1,000 successful search requests — about $0.00075 per search. The Fetch API (URL reading) is the same $0.75 per 1,000 successful requests."}}, {"@type": "Question", "name": "How does DeepSeek search pricing compare to OpenAI and Anthropic?", "acceptedAnswer": {"@type": "Answer", "text": "DeepSeek charges $0.75 per 1,000 searches; OpenAI and Anthropic bill web search at roughly $10 per 1,000 requests. DeepSeek is about 13× cheaper for the tool call itself — though you still pay the LLM tokens for processing results."}}, {"@type": "Question", "name": "How much is DeepSeek OCR and document parsing?", "acceptedAnswer": {"@type": "Answer", "text": "File parsing and the OCR API cost $0.225 per 1,000 pages combined under the same line item."}}, {"@type": "Question", "name": "How much is DeepSeek TTS and speech-to-text?", "acceptedAnswer": {"@type": "Answer", "text": "TTS lists at $0.45 per 10,000 characters with a limited-time 50% promo at $0.225. Speech-to-text (ASR) lists at $0.116 per hour of audio, promo $0.058."}}, {"@type": "Question", "name": "Does DeepSeek search pricing include the LLM tokens?", "acceptedAnswer": {"@type": "Answer", "text": "No. The $0.75/1K covers the tool call only; tokens consumed by the model reading the search results are billed separately at your model's token rates."}}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>DeepSeek Web Search <span>API Cost Calculator</span></h1>
+<p class="sub">Search, Fetch, OCR, TTS and ASR tool pricing — official rates, verified 2026-11-25.</p>
+</header>
+
+<div class="note">✅ Official rates, verified 2026-11-25 from DeepSeek's pricing page: <strong>Search &amp; Fetch $0.75 / 1,000 successful requests</strong> · OCR $0.225 / 1,000 pages · TTS $0.45 / 10K chars (promo $0.225) · ASR $0.116 / hour (promo $0.058).</div>
+<div class="grid">
+<div><label for="sr">Search requests / day</label><input id="sr" type="number" min="0" step="100" value="1000"></div>
+<div><label for="fr">Fetch (URL) requests / day</label><input id="fr" type="number" min="0" step="100" value="500"></div>
+<div><label for="pg">OCR pages / day</label><input id="pg" type="number" min="0" step="100" value="200"></div>
+<div><label for="tts">TTS characters / day</label><input id="tts" type="number" min="0" step="1000" value="10000"></div>
+<div><label for="asr">ASR audio hours / day</label><input id="asr" type="number" min="0" step="0.5" value="2"></div>
+<div><label for="promo">Speech pricing</label><select id="promo"><option value="0" selected>List (TTS $0.45, ASR $0.116)</option><option value="1">Promo 50% (TTS $0.225, ASR $0.058)</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Search + Fetch / day</div><div class="v" id="rSearch">$—</div></div>
+<div class="card"><div class="k">OCR / day</div><div class="v" id="rOcr">$—</div></div>
+<div class="card"><div class="k">TTS + ASR / day</div><div class="v" id="rSpeech">$—</div></div>
+<div class="card fee"><div class="k">Estimated total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+
+<h2>What's in the DeepSeek tool API</h2>
+<table>
+<tr><th>Tool</th><th>Unit</th><th>Price</th></tr>
+<tr><td>Search API (text)</td><td>Per 1,000 successful requests</td><td>$0.75</td></tr>
+<tr><td>Fetch API (URL reading)</td><td>Per 1,000 successful requests</td><td>$0.75</td></tr>
+<tr><td>File parsing + OCR API</td><td>Per 1,000 pages</td><td>$0.225</td></tr>
+<tr><td>Text to Speech (TTS)</td><td>Per 10,000 characters</td><td>$0.45 <span style="color:var(--mut)">(promo $0.225)</span></td></tr>
+<tr><td>Speech to Text (ASR)</td><td>Per hour of audio</td><td>$0.116 <span style="color:var(--mut)">(promo $0.058)</span></td></tr>
+</table>
+
+<h2>~13× cheaper than OpenAI / Anthropic search</h2>
+<table>
+<tr><th>Provider</th><th class="num">Per 1,000 searches</th><th class="num">vs DeepSeek</th></tr>
+<tr><td><strong>DeepSeek Search</strong></td><td class="num">$0.75</td><td class="num">—</td></tr>
+<tr><td>OpenAI web search</td><td class="num">~$10</td><td class="num">~13×</td></tr>
+<tr><td>Anthropic web search</td><td class="num">~$10</td><td class="num">~13×</td></tr>
+</table>
+<p>The tool call is cheap; remember tokens for the model reading the results are billed separately at your model's token rates (e.g. V4.1-Flash off-peak $0.15/M input cache-miss).</p>
+
+<h2>Cut your tool bill</h2>
+<ul>
+<li><strong>Only successful requests bill</strong> — failed searches don't count; monitor your retry loop so it doesn't silently double-bill on success.</li>
+<li><strong>Cache search results</strong> — identical queries inside your TTL hit your own cache instead of the API.</li>
+<li><strong>Batch OCR by document</strong> — 1,000-page pricing means a 5-page PDF costs ~$0.0011; don't re-parse unchanged files.</li>
+<li><strong>Promo speech rates are live now</strong> — ASR at $0.058/hour is ~$1.16 for a 20-hour backlog; budget the list price for after the promo ends.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How much does the DeepSeek Web Search API cost?</h3>
+<p>$0.75 per 1,000 successful requests (~$0.00075 each). The Fetch API for URL reading is the same $0.75 per 1,000.</p>
+<h3>How does it compare to OpenAI/Anthropic search?</h3>
+<p>Both bill ~$10 per 1,000 web-search tool calls — DeepSeek is ~13× cheaper on the tool fee itself.</p>
+<h3>How much is OCR and document parsing?</h3>
+<p>$0.225 per 1,000 pages, shared line item for file parsing and the OCR API.</p>
+<h3>Does the search price include LLM tokens?</h3>
+<p>No — tokens for the model reading results bill separately at your model's rates.</p>
+
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=1)return "$"+n.toFixed(2);return "$"+n.toFixed(3)}
+function calc(){
+  var sr=parseFloat($("sr").value)||0;
+  var fr=parseFloat($("fr").value)||0;
+  var pg=parseFloat($("pg").value)||0;
+  var tts=parseFloat($("tts").value)||0;
+  var asr=parseFloat($("asr").value)||0;
+  var promo=parseInt($("promo").value,10)===1;
+  var ttsRate=promo?0.225:0.45, asrRate=promo?0.058:0.116;
+  var search=(sr+fr)/1000*0.75;
+  var ocr=pg/1000*0.225;
+  var speech=tts/10000*ttsRate+asr*asrRate;
+  $("rSearch").textContent=fmt(search);
+  $("rOcr").textContent=fmt(ocr);
+  $("rSpeech").textContent=fmt(speech);
+  $("rMonth").textContent=fmt((search+ocr+speech)*30);
+}
+["sr","fr","pg","tts","asr","promo"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Rates verified 2026-11-25 — DeepSeek official pricing page (<code>api-docs.deepseek.com/quick_start/pricing</code>): Search/Fetch, File Parsing &amp; OCR, and Speech tables.</li>
+<li>OpenAI/Anthropic comparison uses each provider's published tool pricing as commonly reported; verify before large commitments.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="deepseek-v4.1-flash-api-cost-calculator.html">DeepSeek V4.1 Flash API cost calculator</a> — the token side: $0.15/$0.6 per 1M, off-peak halves</li>
+<li><a href="gemini-decision-1-api-cost-calculator.html">Gemini Decision 1 API cost calculator</a> — $0.10/M input, output free</li>
+<li><a href="claude-haiku-5.5-api-cost-calculator.html">Claude Haiku 5.5 API cost calculator</a> — Anthropic small-model lane</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
