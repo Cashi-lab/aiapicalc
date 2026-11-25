@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniMax H3 Image API Cost Calculator — $0.0218/1K, $0.0233/2K, 4K Promo (2026)</title>
+<meta name="description" content="MiniMax-H3-Image API cost calculator. Official per-image costs: $0.02179 at 1K, $0.02333 at 2K, 4K $0.06879 with limited-time 50% off at $0.03439. Highspeed and image-editing tiers included.">
+<link rel="canonical" href="https://cashi-lab.github.io/aiapicalc/minimax-h3-image-api-cost-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MiniMax H3 Image API Cost Calculator — $0.0218/1K, $0.0233/2K, 4K Promo (2026)">
+<meta property="og:description" content="Official MiniMax-H3-Image per-image pricing: $0.02179 1K · $0.02333 2K · 4K $0.06879 / promo $0.03439 · Highspeed and editing tiers.">
+<meta name="robots" content="index,follow">
+<style>:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:24px}
+h1{font-size:1.6rem;line-height:1.3}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin-top:6px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.card .k{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.card .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+.fee{background:linear-gradient(135deg,#1a2332,#161b22);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+th{color:var(--mut);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+h2{font-size:1.2rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:20px 0 8px}
+p,li{color:#c9d1d9;font-size:.95rem}
+ul{padding-left:20px;margin:8px 0}
+.note{background:#1c2a1e;border:1px solid #238636;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#aff5b4;margin:14px 0}
+.warn{background:#2d2200;border:1px solid #9e6a03;border-radius:8px;padding:10px 14px;font-size:.88rem;color:#e3b341;margin:14px 0}
+code{background:var(--card);border:1px solid var(--bd);padding:1px 6px;border-radius:5px;font-size:.88em}
+footer{border-top:1px solid var(--bd);margin-top:40px;padding-top:16px;color:var(--mut);font-size:.85rem}
+a{color:var(--acc)}
+/* == V2 redesign 2026-10-16 == */
+:root{--acc2:#a371f7;--glow:rgba(79,140,255,.55)}
+body{background:radial-gradient(1100px 480px at 50% -12%,rgba(79,140,255,.15),transparent 62%),radial-gradient(880px 400px at 88% -6%,rgba(163,113,247,.10),transparent 58%),#0a0e14}
+.topnav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:rgba(10,14,20,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1b2330;font-size:.9rem}
+.topnav .brand{font-weight:800;text-decoration:none;color:#e6edf3;letter-spacing:-.01em}
+.topnav .brand b{background:linear-gradient(90deg,#4f8cff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topnav .r{color:#8b949e;text-decoration:none;margin-left:14px}
+.topnav .r:hover{color:#7db1ff}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){h1{background:linear-gradient(90deg,#7db1ff,#a371f7);-webkit-background-clip:text;background-clip:text;color:transparent}h1 span{color:inherit}}
+h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:-.02em}
+.item,.card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.item:hover,.card:hover{transform:translateY(-2px);border-color:var(--glow);box-shadow:0 8px 26px rgba(79,140,255,.13)}
+.fee{border:1px solid transparent;background:linear-gradient(#161b22,#161b22) padding-box,linear-gradient(135deg,#4f8cff,#a371f7) border-box}
+input,select{min-height:44px}
+input:focus,select:focus{outline:2px solid #4f8cff;outline-offset:1px;border-color:transparent;box-shadow:0 0 0 4px rgba(79,140,255,.15)}
+.copybtn{margin-top:8px;display:inline-block;padding:7px 14px;min-height:36px;font-size:.82rem;font-weight:600;color:#7db1ff;background:#10151d;border:1px solid #24446e;border-radius:8px;cursor:pointer}
+.copybtn:hover{border-color:#4f8cff;color:#a8c7ff}
+.rel{list-style:none;padding:0;margin:8px 0 0}
+.rel li{padding:7px 0 7px 14px;border-left:2px solid #24446e;margin:6px 0}
+.rel a{color:#7db1ff}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MiniMax H3 Image API Cost Calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cashi-lab.github.io/aiapicalc/minimax-h3-image-api-cost-calculator.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI API Calc", "item": "https://cashi-lab.github.io/aiapicalc/"}, {"@type": "ListItem", "position": 2, "name": "MiniMax H3 Image API Cost Calculator", "item": "https://cashi-lab.github.io/aiapicalc/minimax-h3-image-api-cost-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does the MiniMax H3 Image API cost?", "acceptedAnswer": {"@type": "Answer", "text": "Official per-image examples: text-to-image 1K $0.02179, 2K $0.02333, 4K $0.06879 with a limited-time 50% discount at $0.03439. Highspeed is $0.03529 at 1K and $0.03622 at 2K."}}, {"@type": "Question", "name": "How is H3-Image billed?", "acceptedAnswer": {"@type": "Answer", "text": "Per token: $2.30 per 1M input text tokens, $1.50 per 1M input image tokens, $3.80 per 1M output image tokens. MiniMax converts those into the per-image examples above."}}, {"@type": "Question", "name": "What resolutions does H3-Image support?", "acceptedAnswer": {"@type": "Answer", "text": "1K (1024x1024), 2K (2048x2048) and 4K (4096x4096), with up to 16 reference images for editing and a 16.6-megapixel threshold that changes the billing note."}}, {"@type": "Question", "name": "Is 4K worth the price?", "acceptedAnswer": {"@type": "Answer", "text": "At list price 4K costs 3.15x the 1K image. With the live 50% promo it is $0.03439, about 1.6x a 1K image, so prototype at 1K and render finals at 4K during the promo."}}]}</script>
+</head>
+<body>
+
+<nav class="topnav"><a class="brand" href="index.html">AI<b> API Calc</b></a><span><a class="r" href="index.html">All calculators</a><a class="r" href="about.html">About</a></span></nav>
+<div class="wrap">
+<header>
+<h1>MiniMax <span>H3 Image</span> API Cost Calculator</h1>
+<p class="sub"><strong>MiniMax-H3-Image</strong> (Standard &amp; Highspeed) per-image budget planner — official rates, verified 2026-11-25.</p>
+</header>
+
+<div class="note">✅ Official rates, verified 2026-11-25 from MiniMax's pricing page: token billing <strong>$2.30/M input text · $1.50/M input image · $3.80/M output image</strong>, which the provider converts to <strong>$0.02179 per 1K image</strong> and <strong>$0.02333 per 2K image</strong>. 4K lists at $0.06879 with a live 50% promo at <strong>$0.03439</strong>.</div>
+<div class="grid">
+<div><label for="tier">Model tier</label><select id="tier">
+<option value="0.02179" selected>Standard — 1K (1024×1024) $0.02179</option>
+<option value="0.02333">Standard — 2K (2048×2048) $0.02333</option>
+<option value="0.06879">Standard — 4K list $0.06879</option>
+<option value="0.03439">Standard — 4K promo 50% $0.03439</option>
+<option value="0.03529">Highspeed — 1K $0.03529</option>
+<option value="0.03622">Highspeed — 2K $0.03622</option>
+</select></div>
+<div><label for="imgs">Images / day</label><input id="imgs" type="number" min="0" step="10" value="100"></div>
+<div><label for="refs">Reference images / edit</label><select id="refs"><option value="0" selected>0 — text-to-image</option><option value="0.00475">1 ref (+~$0.0048)</option><option value="0.0176">3 refs (+~$0.0176)</option></select></div>
+<div><label for="days">Days / month</label><select id="days"><option value="30" selected>30 days</option><option value="7">7 days</option><option value="1">1 day</option></select></div>
+</div>
+<div class="results">
+<div class="card"><div class="k">Cost / image</div><div class="v" id="rImg">$—</div></div>
+<div class="card"><div class="k">Cost / day</div><div class="v" id="rDay">$—</div></div>
+<div class="card fee"><div class="k">Estimated total / month</div><div class="v" id="rMonth">$—</div></div>
+</div>
+
+<h2>What is MiniMax-H3-Image</h2>
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>Model</td><td>MiniMax-H3-Image (Standard) and MiniMax-H3-Image-Highspeed — 33.1B open-weight image model family</td></tr>
+<tr><td>Resolutions</td><td>1K (1024×1024) · 2K (2048×2048) · 4K (4096×4096)</td></tr>
+<tr><td>Editing</td><td>Up to 16 reference images; cost rises with reference count</td></tr>
+<tr><td>Billing</td><td>Per token — $2.30/M input text, $1.50/M input image, $3.80/M output image</td></tr>
+<tr><td>Provider examples</td><td>1K $0.02179 · 2K $0.02333 · 4K $0.06879 (promo $0.03439)</td></tr>
+<tr><td>Prompt helper</td><td>H3-Image-Context-IR prompt enhancement shares the same rate card</td></tr>
+<tr><td>Wide-image note</td><td>A different billing note applies when the delivered image is at least 16.6M pixels (width × height)</td></tr>
+</table>
+
+<h2>Cost per image, all tiers</h2>
+<table>
+<tr><th>Tier</th><th class="num">1K</th><th class="num">2K</th><th class="num">4K</th></tr>
+<tr><td>Standard — text-to-image</td><td class="num">$0.02179</td><td class="num">$0.02333</td><td class="num"><s>$0.06879</s> $0.03439</td></tr>
+<tr><td>Standard — edit, 1 ref</td><td class="num">$0.02654</td><td class="num">$0.02658</td><td class="num"><s>$0.07312</s> $0.03656</td></tr>
+<tr><td>Highspeed — text-to-image</td><td class="num">$0.03529</td><td class="num">$0.03622</td><td class="num">—</td></tr>
+<tr><td>Highspeed — edit, 3 refs</td><td class="num">$0.06037</td><td class="num">$0.06069</td><td class="num">—</td></tr>
+</table>
+<p>Resolution is nearly free between 1K and 2K (7% more), so 2K is the default sweet spot. 4K is the step change — 3.15× at list, but only 1.6× while the 50% promo runs.</p>
+
+<h2>Cut your H3-Image bill</h2>
+<ul>
+<li><strong>Draft at 1K, finish at 4K during the promo</strong> — 4K at $0.03439 is only 58% more than a 1K render right now.</li>
+<li><strong>Skip Highspeed unless latency matters</strong> — it costs 62% more at 1K and 55% more at 2K for the same resolution.</li>
+<li><strong>Count your reference images</strong> — 3 refs at 1K editing costs $0.06037 vs $0.02654 with one: the references, not the pixels, dominate edits.</li>
+<li><strong>Watch the 16.6MP rule</strong> — very wide aspect ratios can cross the pixel threshold and change how the request bills.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How much does the MiniMax H3 Image API cost?</h3>
+<p>$0.02179 per 1K image, $0.02333 per 2K, and $0.06879 per 4K list — currently $0.03439 with a limited-time 50% discount. Highspeed is $0.03529 / $0.03622 at 1K / 2K.</p>
+<h3>How is it billed?</h3>
+<p>Per token: $2.30 per 1M input text, $1.50 per 1M input image, $3.80 per 1M output image tokens. MiniMax converts those into the per-image examples above.</p>
+<h3>Is 4K worth it?</h3>
+<p>At list price 4K is 3.15× a 1K image. With the live promo ($0.03439) it is about 1.6× — that is the window to render finals at 4K.</p>
+<h3>Do reference images change the price?</h3>
+<p>Yes. Editing with 1 reference at 1K is $0.02654; with 3 references it is $0.06037 — roughly 2.3×.</p>
+
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function fmt(n){if(!isFinite(n))return "$—";if(n>=1000)return "$"+n.toLocaleString("en-US",{maximumFractionDigits:0});if(n>=1)return "$"+n.toFixed(2);if(n>=0.01)return "$"+n.toFixed(3);return "$"+n.toFixed(4)}
+function calc(){
+  var base=parseFloat($("tier").value)||0;
+  var imgs=parseFloat($("imgs").value)||0;
+  var refs=parseFloat($("refs").value)||0;
+  var d=parseInt($("days").value,10)||30;
+  var per=base+refs;
+  $("rImg").textContent=fmt(per);
+  $("rDay").textContent=fmt(imgs*per);
+  $("rMonth").textContent=fmt(imgs*per*d);
+}
+["tier","imgs","refs","days"].forEach(function(id){$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)});
+calc();
+})();
+</script>
+
+<h2>Pricing sources &amp; updates</h2>
+<ul>
+<li>Rates verified 2026-11-25 — MiniMax official pricing page (<code>platform.minimax.io/docs/pricing/overview</code>), H3-Image token table and per-image cost examples.</li>
+<li>Promo is provider-stated as limited-time; re-check before budgeting long campaigns.</li>
+<li>More tools on our <a href="index.html">calculator hub</a></li>
+</ul>
+
+<section style="margin:34px 0 0;padding:16px;border:1px solid #30363d;border-radius:10px;background:#161b22;font-size:.9rem;color:#c9d1d9;line-height:1.7;">
+<strong style="color:#2f81f7;">📈 Daily AI signals, in your WeChat</strong><br>
+We publish daily AI-driven market signals every trading day on the WeChat Official Account <strong>「AI Agent投研」</strong>.<br>
+<span style="color:#8b949e;">微信搜索「AI Agent投研」关注 · 回复「工具」领取全部计算器合集 + 每日信号速览。Data for research only — not investment advice.</span>
+</section>
+
+<h2>Related calculators</h2>
+<ul class="rel">
+<li><a href="seedance-3.0-api-cost-calculator.html">Seedance 3.0 API cost calculator</a> — video lane, $0.103–$0.569/s</li>
+<li><a href="flux-3-max-api-cost-calculator.html">FLUX 3 Max API cost calculator</a> — image lane, fal promo $0.0425/s</li>
+<li><a href="gemini-decision-1-api-cost-calculator.html">Gemini Decision 1 API cost calculator</a> — $0.10/M input, output free</li>
+</ul>
+<footer>
+<p>© 2026 AI API Calc — independent tool. Verify current pricing with the provider before budgeting.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var card=document.querySelector(".results .fee")||document.querySelector(".results .card");
+if(!card)return;
+var v=card.querySelector(".v"),k=card.querySelector(".k"),h1=document.querySelector("h1");
+if(!v)return;
+var btn=document.createElement("button");btn.type="button";btn.className="copybtn";btn.textContent="Copy summary";
+btn.addEventListener("click",function(){
+var lbl=k?k.textContent.trim().replace(/\s+/g," "):"";
+var txt=(h1?h1.textContent.trim().replace(/\s+/g," ")+" — ":"")+(lbl?lbl+": ":"")+v.textContent.trim()+" · https://cashi-lab.github.io/aiapicalc/";
+function done(ok){btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent="Copy summary"},1700)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)})}
+else{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(t);done(ok)}
+});
+card.appendChild(btn);
+})();
+</script>
+
+</body>
+</html>
